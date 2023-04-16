@@ -1,17 +1,18 @@
 type Props = {
+  color?: string
   children: React.ReactNode
 }
 
-export const Typography = ({ children }: Props) => {
+export const Typography = ({ color, children }: Props) => {
   return (
-    <p className='text-zinc-500'>
+    <p className={color ?? 'text-zinc-500'}>
       {children}
     </p>
   )
 }
 
 const Subtitle = ({ children }: Props) => (
-  <h2 className='font-bold text-4xl mt-3 mb-2'>
+  <h2 className='font-bold text-4xl my-3'>
     {children}
   </h2>
 )

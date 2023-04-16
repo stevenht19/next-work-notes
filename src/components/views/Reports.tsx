@@ -3,7 +3,7 @@ import { Typography } from '@/components/atoms/Typography'
 export const Reports = () => {
   return (
     <Typography>
-      You have no notes for now!
+      You have no reports for now!
     </Typography>
   )
 }

@@ -1,4 +1,4 @@
-type Props = {
+export type Props = {
   children: React.ReactNode
   className?: string
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void

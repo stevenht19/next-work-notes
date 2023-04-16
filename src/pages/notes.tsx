@@ -1,9 +1,9 @@
 import { Form } from '@/components/atoms/Form'
-import { Input, Props } from '@/components/atoms/Input'
+import { Typography } from '@/components/atoms/Typography'
+import { Input, Props } from '@/components/atoms/Textarea'
 import { FloatingButton } from '@/components/buttons/FloatingButton'
 import { IoIosSave } from 'react-icons/io'
 import { useState } from 'react'
-import { Typography } from '@/components/atoms/Typography'
 
 export default function Notes() {
   const [notes, setNotes] = useState<string[]>([])

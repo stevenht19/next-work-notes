@@ -1,9 +1,11 @@
+import { Avatar } from '@/components/atoms/Avatar'
+
 export const Header = () => {
   return (
-    <header className='flex items-center px-10 border-b border-b-zinc-800 h-16'>
+    <header className='flex items-center justify-between px-4 border-b border-b-zinc-800 h-16'>
       <nav>
-        aaaa
       </nav>
+      <Avatar />
     </header>
   )
 }
