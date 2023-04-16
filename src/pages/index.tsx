@@ -1,18 +1,29 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import { Button } from '@/components/atoms/AddButton'
-
-//const inter = Inter({ subsets: ['latin'] })
+import { HomeTabs } from '@/components/tabs/HomeTabs'
+import { Button } from '@/components/buttons/AddButton'
+import { Badge } from '@/components/atoms/Badge'
+import { Typography } from '@/components/atoms/Typography'
 
 export default function Home() {
   return (
-    <div className='max-w-6xl mx-auto p-3'>
-      <h2 className='text-4xl text-white font-bold mb-8'>
-        Welcome
-      </h2>
-      <Button>
-        Add Notes
-      </Button>
-    </div>
+    <>
+      <div className='flex items-center gap-4'>
+        <Typography.h2>
+          Welcome
+        </Typography.h2>
+        <Badge color='green' text='Workday' />
+      </div>
+      <div className='flex gap-6 pt-6 pb-8'>
+        <Button path='/notes'>
+          Quick Notes
+        </Button>
+        <Button path='/diary-report'>
+          Diary Report
+        </Button>
+        <Button path='/notes'>
+          Weekend Report
+        </Button>
+      </div>
+      <HomeTabs />
+    </>
   )
 }
