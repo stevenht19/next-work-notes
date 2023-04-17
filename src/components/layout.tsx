@@ -11,7 +11,7 @@ export const Layout = ({ children }: {
   return (
     <>
       <Header />
-      <main className={`${inter.className} relative h-full max-w-6xl mx-auto px-4 py-6`}>
+      <main className={`${inter.className} h-screen max-w-6xl mx-auto px-4 pt-24`}>
         {children}
       </main>
     </>

@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Props as InputProps } from '@/components/atoms/Input'
 import useBoolean from './useBoolean'
 
 export type SubmitHandler<T> = (data: T) => Promise<void> 
@@ -14,15 +13,14 @@ export const useForm = <T, >(initialValues: T) => {
     error
   }
 
-  const onChange: InputProps['onChange'] = ({ target }) => {
-    
+  const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (error) {
       setError(null)
     }
     
     setValues({
       ...formValues,
-      [target.name]: target.value
+      [e.target.name]: e.target.value
     })
   }
 

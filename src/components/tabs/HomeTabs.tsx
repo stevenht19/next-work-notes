@@ -3,8 +3,11 @@ import { Tabs, Tab, TabPanel } from '@/components/atoms/Tabs'
 import { Notes } from '@/components/views/Notes'
 import { Reports } from '@/components/views/Reports'
 import { Weekend } from '@/components/views/Weekend'
+import { HomeProps } from '@/pages'
+import { Grid } from '../atoms/Grid'
+import { Note } from '../notes/Note'
 
-export const HomeTabs = () => {
+export const HomeTabs = ({ notes }: HomeProps) => {
 
   const [value, setValue] = useState(0)
 
@@ -23,7 +26,17 @@ export const HomeTabs = () => {
         <Tab label='Weekend' />
       </Tabs>
       <TabPanel index={0} value={value}>
-        <Notes />
+        {
+          Boolean(notes.length) && (
+            <Grid>
+              {
+                notes.map((note) => (
+                  <Note key={note.id} {...note} />
+                ))
+              }
+            </Grid>
+          )
+        }
       </TabPanel>
       <TabPanel index={1} value={value}>
         <Reports />
