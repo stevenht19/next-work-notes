@@ -24,7 +24,7 @@ export default function Home({ notes }: HomeProps) {
         <Badge color='green' text='Workday' />
       </div>
       <div className='flex gap-6 pt-6 pb-8'>
-        <Button path='/notes'>
+        <Button path='/create-note'>
           Quick Notes
         </Button>
         <Button path='/diary-report'>

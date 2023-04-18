@@ -4,6 +4,7 @@ import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react'
 import { AiOutlinePoweroff } from 'react-icons/ai'
 
 export const Avatar = () => {
+
   const router = useRouter()
   const supabase = useSupabaseClient()
   const user = useUser()
@@ -25,15 +26,22 @@ export const Avatar = () => {
         {user.email?.charAt(0).toUpperCase()}
       </button>
       {
-        open ? (
-          <div className='shadow-lg top-full m-2 rounded-md py-2 bg-neutral-900 right-0 absolute w-36'>
-            <button className='flex w-full items-center justify-center gap-3 font-medium' onClick={signOut}>
+        open && (
+          <div
+            className='shadow-lg top-full m-1 rounded-md py-2 bg-neutral-800 right-0 absolute w-32'
+          >
+            <button
+              className='flex w-full items-center justify-center gap-3 font-medium'
+              onClick={signOut}
+            >
               <AiOutlinePoweroff size={18} />
               Sign out
             </button>
           </div>
-        ) : null
+        )
       }
     </div>
   )
 }
+
+export default Avatar

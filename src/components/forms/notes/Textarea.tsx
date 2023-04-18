@@ -14,7 +14,7 @@ export const Textarea = (props: Props) => {
       value={value}
       name={name}
       spellCheck='false'
-      className='resize-none bg-transparent placeholder:text-zinc-500 w-full focus:outline-none focus:outline-1'
+      className='resize-none leading-8 bg-transparent placeholder:text-zinc-500 w-full focus:outline-none focus:outline-1'
       placeholder={placeholder}
       onChange={onChange}
     />

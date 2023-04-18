@@ -1,25 +1,27 @@
-import { Props } from './types'
-import { useBoolean } from '@/hooks'
-import { useForm } from '@/hooks/useForm'
-import { NoteValues } from './types'
-import { Typography } from '@/components/atoms/Typography'
-import { IconButton } from '@/components/buttons/IconButton'
-import { FloatingButton } from '@/components/buttons/FloatingButton'
 import { RxCheck } from 'react-icons/rx'
 import { AiFillEdit } from 'react-icons/ai'
-import { IoIosSave } from 'react-icons/io'
+import { CiSaveDown2 } from 'react-icons/ci'
+import { MdCreateNewFolder } from 'react-icons/md'
+import { useBoolean } from '@/hooks'
+import { useForm } from '@/hooks/useForm'
+import { Typography } from '@/components/atoms/Typography'
+import { IconButton } from '@/components/buttons/IconButton'
 import { Textarea } from './Textarea'
 import { Input } from './Input'
+import { Props, NoteValues } from './types'
+import { Button } from '@/components/atoms/Button'
+import { useToast } from '@/hooks/useToast'
 
 export default function NoteForm({ initialValues, onSubmit }: Props) {
   const [open, setOpen] = useBoolean()
+  const { onOpen } = useToast()
 
-  const { 
-    formValues, 
-    onChange, 
-    handleSubmit, 
-    formState: { 
-      isSubmitting 
+  const {
+    formValues,
+    onChange,
+    handleSubmit,
+    formState: {
+      isSubmitting
     }
   } = useForm<NoteValues>(
     initialValues ?? {
@@ -27,6 +29,13 @@ export default function NoteForm({ initialValues, onSubmit }: Props) {
       content: '',
     }
   )
+
+  const onOpenToast = () => {
+    onOpen({
+      type: 'success',
+      message: 'Saved Successfully'
+    })
+  }
 
   return (
     <div className='flex flex-col h-full'>
@@ -57,7 +66,7 @@ export default function NoteForm({ initialValues, onSubmit }: Props) {
         />
       </header>
       <form
-        className='flex flex-1 p-2 relative'
+        className='flex flex-1 p-2 relative text-neutral-200'
         onSubmit={handleSubmit(onSubmit)}
       >
         <Textarea
@@ -66,16 +75,22 @@ export default function NoteForm({ initialValues, onSubmit }: Props) {
           onChange={onChange}
           placeholder='Type to add a note'
         />
-        <FloatingButton
-          loading={isSubmitting}
+      </form>
+      <footer className='flex gap-6 pb-8'>
+        <Button
+          onClick={onOpenToast}
+          icon={<CiSaveDown2 size={23} />}
+        >
+          Generate a Report
+        </Button>
+        <Button
           type='submit'
-          icon={
-            <IoIosSave size={23} />
-          }
+          loading={isSubmitting}
+          icon={<CiSaveDown2 size={23} />}
         >
           Save
-        </FloatingButton>
-      </form>
+        </Button>
+      </footer>
     </div>
   )
 }

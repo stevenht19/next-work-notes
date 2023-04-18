@@ -4,9 +4,10 @@ import { useState } from 'react'
 import { Layout } from '@/components/layout'
 import type { AppProps } from 'next/app'
 import '@/styles/globals.css'
+import ToastProvider from '@/context/Toast'
 
 export default function App({ Component, pageProps }: AppProps) {
- 
+
   const [supabaseClient] = useState(() => createBrowserSupabaseClient())
 
   return (
@@ -14,9 +15,11 @@ export default function App({ Component, pageProps }: AppProps) {
       supabaseClient={supabaseClient}
       initialSession={pageProps.initialSession}
     >
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <ToastProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ToastProvider>
     </SessionContextProvider>
   )
 }

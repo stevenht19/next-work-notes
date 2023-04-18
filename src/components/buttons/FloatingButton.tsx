@@ -1,3 +1,4 @@
+import { Spin } from '../atoms/Spin'
 import { Props } from './types'
 
 export const FloatingButton = ({ type, icon, loading, children }: Props) => {
@@ -8,9 +9,9 @@ export const FloatingButton = ({ type, icon, loading, children }: Props) => {
     <button
       type={type ?? 'button'}
       disabled={loading}
-      className={`${loadingClassName} font-medium absolute px-6 py-3 rounded-full bottom-10 right-10 text-gray-900 ${withIcon}`}
+      className={`${loadingClassName} font-medium px-6 py-3 rounded-md text-gray-900 ${withIcon}`}
     >
-      {icon && icon}
+      {(loading) ? <Spin /> : icon}
       {children}
     </button>
   )
