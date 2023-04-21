@@ -1,24 +1,12 @@
-export type Props = {
-  value: string
-  name: string
-  label?: string
-  placeholder: string
-  type?: string
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void
-}
+import { forwardRef } from 'react'
+import { Props } from './Input'
 
 const className = 'bg-neutral-800/50 rounded-md px-3 py-2 w-full placeholder:text-neutral-600/70 outline-none focus:bg-neutral-800/90 focus:outline-1 focus:outline-neutral-400'
 
-export const Input = ({
-  value,
-  name,
-  label,
-  type,
-  placeholder,
-  onChange
-}: Props) => {
+export const RefInput = forwardRef<HTMLInputElement, Props>(function Input(props, ref) {
+
+  const { value, label, type, name, placeholder, onFocus, onBlur, onChange } = props
+
   return (
     <div>
       {
@@ -29,14 +17,17 @@ export const Input = ({
         )
       }
       <input
+        ref={ref}
         type={type ?? 'text'}
         name={name}
         value={value}
-        onChange={onChange}
         placeholder={placeholder}
         className={className}
+        onChange={onChange}
+        onBlur={onBlur}
+        onFocus={onFocus}
         spellCheck='false'
       />
     </div>
   )
-}
+})

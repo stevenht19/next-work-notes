@@ -3,7 +3,6 @@ module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}',
-    './src/app/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
@@ -42,8 +41,15 @@ module.exports = {
         'toastLeave': 'toast-leave .2s ease forwards',
         'fadeIn': 'fadeIn 1s ease forwards'
       },
+      backgroundSize: {
+        'expanded': '15000%',
+        'full': '100%'
+      },
+      transitionProperty: {
+        'background': 'background'
+      },
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-radial': 'radial-gradient(circle, transparent, red)',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },

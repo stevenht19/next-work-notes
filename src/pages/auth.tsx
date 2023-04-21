@@ -29,7 +29,7 @@ export default function Auth() {
         {`Welcome! Let's get started for free`}
       </Typography>
       <form 
-        className='bg-neutral-900/50 flex flex-col gap-7 border border-neutral-800 mt-6 p-8 rounded-md'
+        className='flex flex-col gap-7 border border-neutral-800 mt-6 p-8 rounded-md'
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input
@@ -47,7 +47,10 @@ export default function Auth() {
           onChange={onChange}
           placeholder='Type a password'
         />
-        <Button loading={isSubmitting}>
+        <Button
+          type='submit'
+          loading={isSubmitting}
+        >
           Sign up
         </Button>
       </form>

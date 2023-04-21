@@ -3,6 +3,7 @@ import { Spin } from './Spin'
 type Props = {
   type?: 'button' | 'submit'
   loading?: boolean
+  disabled?: boolean
   icon?: React.ReactNode
   children: React.ReactNode
   onClick?: () => void
@@ -11,19 +12,21 @@ type Props = {
 export const Button = ({ 
   type, 
   icon, 
-  loading, 
+  loading,
+  disabled,
   children,
   onClick
 }: Props) => {
 
-  const withIcon = icon ? ' gap-3 w-fit min-w-[7.5rem] px-4' : ''
-  const disabledClassName = loading ? 'bg-white/40 cursor-not-allowed' : 'bg-white cursor-pointer'
+  const withIcon = icon ? ' gap-3 w-fit min-w-[7.5rem]' : ''
+  const disabledClassName = disabled || loading ? 'bg-white/40 cursor-not-allowed' : 'bg-white cursor-pointer'
+  const className = 'justify-center font-medium flex py-2 px-7 rounded-md text-neutral-900 mt-4 mb-3'
 
   return (
     <button
       type={type || 'button'}
-      disabled={loading} 
-      className={`${withIcon} ${disabledClassName} justify-center flex py-2 rounded-md text-neutral-900 mt-3 mb-3`}
+      disabled={disabled || loading}
+      className={`${withIcon} ${disabledClassName} ${className}`}
       {...(onClick && { onClick })}
     >
       {

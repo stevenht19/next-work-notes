@@ -28,13 +28,16 @@ export const Avatar = () => {
       {
         open && (
           <div
-            className='shadow-lg top-full m-1 rounded-md py-2 bg-neutral-800 right-0 absolute w-32'
+            className='shadow-lg top-full m-2 rounded-md bg-neutral-950 border border-neutral-700 right-0 absolute w-48'
           >
+            <div className='text-zinc-400 pt-4 px-4'>
+              {user.email}
+            </div>
             <button
-              className='flex w-full items-center justify-center gap-3 font-medium'
+              className='flex items-center gap-3 font-medium w-full my-2 px-3 py-2 text-zinc-300 hover:bg-neutral-900'
               onClick={signOut}
             >
-              <AiOutlinePoweroff size={18} />
+              <AiOutlinePoweroff size={17} />
               Sign out
             </button>
           </div>

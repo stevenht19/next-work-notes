@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import useBoolean from './useBoolean'
 
-export type SubmitHandler<T> = (data: T) => Promise<void> 
+export type SubmitHandler<T> = (data: T) => Promise<void> | void
 
 export const useForm = <T, >(initialValues: T) => {
   const [formValues, setValues] = useState<T>(initialValues)
@@ -26,22 +26,33 @@ export const useForm = <T, >(initialValues: T) => {
 
   const handleSubmit = (onSubmit: SubmitHandler<T>) => (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    
-    setSubmitting.on()
 
-    onSubmit(formValues)
-      .catch((err) => {
-        if (err instanceof Error) {
-          setError(err.message)
-        }
-        setSubmitting.off()
-      })
+    try {
+ 
+      setSubmitting.on()
+      onSubmit(formValues)
+
+    } catch(err) {
+      if (err instanceof Error) {
+        setError(err.message)
+      }
+      setSubmitting.off()
+    }
+    
+  }
+
+  const clearForm = () => setValues(initialValues)
+
+  const replace = (data: T) => {
+    setValues(data)
   }
 
   return {
     formValues,
     formState,
     onChange,
-    handleSubmit
+    handleSubmit,
+    clearForm,
+    replace
   }
 }

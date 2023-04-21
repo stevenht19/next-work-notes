@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Tabs, Tab, TabPanel } from '@/components/atoms/Tabs'
-import { Notes } from '@/components/views/Notes'
 import { Reports } from '@/components/views/Reports'
 import { Weekend } from '@/components/views/Weekend'
 import { HomeProps } from '@/pages'

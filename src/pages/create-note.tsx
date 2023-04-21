@@ -1,8 +1,8 @@
+import Head from 'next/head'
 import { NoteForm } from '@/components/forms/notes'
 import { NoteValues }  from '@/components/forms/notes/types'
 import { noteService } from '@/services/notes/notes.service'
 import { useUser } from '@supabase/auth-helpers-react'
-import Head from 'next/head'
 
 export default function Notes() {
   const user = useUser()
