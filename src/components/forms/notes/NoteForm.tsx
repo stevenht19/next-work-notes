@@ -1,77 +1,67 @@
-import { RxCheck } from 'react-icons/rx'
-import { AiFillEdit } from 'react-icons/ai'
-import { CiSaveDown2 } from 'react-icons/ci'
-import { useBoolean } from '@/hooks'
-import { useForm } from '@/hooks/useForm'
-import { useToast } from '@/hooks/useToast'
-import { Button } from '@/components/atoms/Button'
-import { Typography } from '@/components/atoms/Typography'
-import { IconButton } from '@/components/buttons/IconButton'
-import { Props, NoteValues } from './types'
-import { Textarea } from './Textarea'
+import StarterKit from '@tiptap/starter-kit'
+import { useEditor, EditorContent } from '@tiptap/react'
+import { RiBold, RiItalic, RiH2 } from 'react-icons/ri'
+import { Toolbar } from '@/components/editor/Toolbar'
+import { Props } from './types'
 import { Input } from './Input'
 
 export default function NoteForm({ initialValues, onSubmit }: Props) {
-  const [open, setOpen] = useBoolean()
-  const { onOpen } = useToast()
 
-  const {
-    formValues,
-    onChange,
-    handleSubmit,
-    formState: {
-      isSubmitting
-    }
-  } = useForm<NoteValues>(
-    initialValues ?? {
-      title: 'Notes Reason Title',
-      content: '',
-    }
-  )
-
-  const onOpenToast = () => {
-    onOpen({
-      type: 'success',
-      message: 'Saved Successfully'
-    })
-  }
+  const editor = useEditor({
+    editorProps: {
+      attributes: {
+        class: 'h-full border-none p-2 outline-none'
+      }
+    },
+    extensions: [
+      StarterKit.configure({
+        heading: {
+          HTMLAttributes: {
+            class: 'text-2xl font-bold',
+          }
+        }
+      }),
+    ]
+  })
 
   return (
     <div className='flex flex-col h-full'>
-      <header className='flex items-center gap-5'>
-        {
-          open ? (
-            <Input
-              value={formValues!.title!}
-              name='title'
-              placeholder={'Type to add a title'}
-              onChange={onChange}
-            />
-          ) : (
-            <Typography.h2>
-              {formValues.title}
-            </Typography.h2>
-          )
-        }
-        <IconButton
-          icon={
-            open ? (
-              <RxCheck />
-            ) : (
-              <AiFillEdit />
-            )
-          }
-          onClick={setOpen.toggle}
+      <Input />
+      <Toolbar>
+        <Toolbar.Item
+          tool='bold'
+          icon={<RiBold />}
+          editor={editor!}
+          onClick={() => editor?.chain().focus().toggleBold().run()}
         />
-      </header>
-      <form onSubmit={handleSubmit(onSubmit)} className='h-full flex flex-col justify-between'>
+        <Toolbar.Item
+          tool='italic'
+          icon={<RiItalic />}
+          editor={editor!}
+          onClick={() => editor?.chain().focus().toggleItalic().run()}
+        />
+        <Toolbar.Item 
+          tool='heading'
+          icon={<RiH2 />}
+          level={2}
+          editor={editor!}
+          onClick={() => editor?.chain().focus().toggleHeading({ level: 2 }).run()}
+        />
+      </Toolbar>
+      <EditorContent
+        editor={editor}
+        spellCheck={false}
+        autoFocus={false}
+        className='flex-1'
+      />
+    </div>
+  )
+}
+
+
+/*
+<form onSubmit={handleSubmit(onSubmit)} className='h-full flex flex-col justify-between'>
         <div className='flex flex-1 p-2 relative text-neutral-200'>
-          <Textarea
-            value={formValues!.content!}
-            name={'content'}
-            onChange={onChange}
-            placeholder='Type to add a note'
-          />
         </div>
         <footer className='flex gap-6 pb-8'>
           <Button
@@ -89,6 +79,5 @@ export default function NoteForm({ initialValues, onSubmit }: Props) {
           </Button>
         </footer>
       </form>
-    </div>
-  )
-}
+
+*/

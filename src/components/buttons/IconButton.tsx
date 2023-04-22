@@ -1,13 +1,15 @@
 import { Props } from './types'
 
-export const IconButton = ({ icon, onClick }: Props) => {
+export const IconButton = ({ icon, active, onClick }: Props) => {
+
+  const activeClassName = active ? 'border-blue-600' : 'border-neutral-800' 
+
   return (
-    <button
-      type='button'
-      className='border border-zinc-800 grid place-items-center p-2.5 rounded-md'
+    <div
+      className={`border grid transition-colors place-items-center p-2.5 rounded-md cursor-pointer ${activeClassName}`}
       onClick={onClick}
     >
       {icon}
-    </button>
+    </div>
   )
 }
