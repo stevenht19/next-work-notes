@@ -1,22 +1,29 @@
-type Props = {
-  color: 'green' | 'yellow'
-  text: string
+import dayjs from 'dayjs'
+
+const getDayStatus = (day: number) => {
+  if (day === 6 || day === 7) {
+    return {
+      color: 'bg-yellow-200/20 text-yellow-200/90',
+      status: 'Rest Day'
+    }
+  }
+
+  return {
+    color: 'bg-green-200/20 text-green-200/90',
+    status: 'Workday'
+  }
 }
 
-const getColor = (color: Props['color']) => {
-  if (color === 'green')
-    return 'bg-green-200/20 text-green-200/90'
-  if (color === 'yellow')
-    return ''
-}
 
+export const Badge = () => {
 
-export const Badge = ({ color, text }: Props) => {
+  const { color, status } = getDayStatus(dayjs().day())
+
   return (
     <div
-      className={`px-2 py-0.5 mt-2 font-medium inline-block text-xs rounded-sm ${getColor(color)}`}
+      className={`px-2 py-0.5 mt-2 font-medium inline-block text-xs rounded-sm ${color}`}
     >
-      {text}
+      {status}
     </div>
   )
 }

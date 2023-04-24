@@ -43,7 +43,7 @@ export default function Modal({ onClose, children }: Props) {
       <div
         ref={ref}
         onClick={handleClick}
-        className='bg-black/50 fixed inset-0 z-20 flex flex-col justify-center items-center'
+        className='bg-black/60 fixed inset-0 z-20 flex flex-col justify-center items-center'
       >
         {children}
       </div>

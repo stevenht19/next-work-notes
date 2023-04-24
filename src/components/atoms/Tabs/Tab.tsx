@@ -18,12 +18,12 @@ const Tab = ({
 
   return (
     <button
-      className={`w-24 text-neutral-400 ${tabColor}`}
+      className={`w-24 text-neutral-400 ${tabColor} py-4`}
       {...(onChange && {
         onClick: () => onChange(index as number)
       })}
     >
-      <span className='block mb-4'>{label}</span>
+      <span className='block'>{label}</span>
     </button>
   )
 }

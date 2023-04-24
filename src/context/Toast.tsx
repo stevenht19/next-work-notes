@@ -17,7 +17,7 @@ export const ToastContext = createContext<ToastContextType>({
   onOpen() {}
 })
 
-export default function ToastProvider({ children }: {
+export function ToastProvider({ children }: {
   children: React.ReactNode
 }) {
 

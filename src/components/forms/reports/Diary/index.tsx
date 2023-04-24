@@ -1,28 +1,38 @@
-import { useRef, useState } from 'react'
-import { useBoolean } from '@/hooks'
+import { useRef } from 'react'
+import { BsClipboardFill } from 'react-icons/bs'
 import { useScroll } from '@/hooks/useScroll'
+import { useBoolean } from '@/hooks'
+import { RxClipboard } from 'react-icons/rx'
 import { useModal } from '@/components/atoms/Modal/Modal'
 import { useForm, SubmitHandler, } from '@/hooks/useForm'
+import { Report } from '@/models/Report.model'
 import { Button } from '@/components/atoms/Button'
+import { IconButton } from '@/components/buttons/IconButton'
 import { RefInput } from '@/components/atoms/RefInput'
 import { ActivityItem } from './Activity'
 import { Activity } from './types'
+import { useActivities } from './hooks/useActivities'
+
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import localeData from 'dayjs/plugin/localeData'
-
+import { CopyToClipboardButton } from '@/components/buttons/CopyToClipboardButton'
 
 dayjs.locale('en')
 dayjs.extend(relativeTime)
 dayjs.extend(localeData)
 
-export const DiaryReportForm = () => {
+type Props = {
+  report?: Report | null
+  action: (report: Report['activities']) => Promise<void>
+}
 
+export const DiaryReportForm = ({ report, action }: Props) => {
   const { 
     formValues, 
     onChange, 
     handleSubmit, 
-    clearForm, 
+    clearForm,
     replace
   } = useForm<Activity>({
     id: Date.now(),
@@ -31,62 +41,65 @@ export const DiaryReportForm = () => {
 
   const { onFocus, onBlur } = useModal()
 
-  const [activities, setActivities] = useState<Activity[]>([])
-  const [isSubmitting, setSubmitting] = useBoolean()
-  const [editing, setEditing] = useBoolean()
+  const {
+    activities, 
+    editing,
+    onAdd, 
+    onEdit, 
+    onDelete, 
+    startEditing, 
+    stopEditing 
+  } = useActivities(report?.activities)
+
+  const [submitting, setSubmitting] = useBoolean()
 
   const listRef = useScroll(activities)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const onSubmit: SubmitHandler<Activity> = (activity) => {
     if (editing) {
-      onEdit()
+      onEdit(formValues)
     } else {
       onAdd(activity)
     }
 
     clearForm()
-    setEditing.off()
+    stopEditing()
   }
 
-  const onSave = () => {
-    setSubmitting.on()
-  }
-
-
-  const onAdd = (activity: Activity) => {
-    setActivities((activities) => {
-      return activities.concat(activity)
-    })
-  }
-
-  const onEdit = () => {
-    setActivities((activities) => {
-      return activities.map((act) => {
-        return act.id === formValues.id ? formValues : act
-      })
-    })
-  }
-
-  const startEditing = (activity: Activity) => {
+  const onEdition = (activity: Activity) => {
+    startEditing()
     replace(activity)
-    setEditing.on()
     inputRef.current?.focus()
   }
 
-  const onDelete = (id: Activity['id']) => {
-    setActivities(() => {
-      return activities
-        .filter(activities => activities.id !== id)
-    })
+  const onSave = async () => {
+    setSubmitting.on()
+
+    await action(
+      activities
+        .map(({ name }) => name)
+        .join(',')
+    )
+    
+    setSubmitting.off()
+  }
+
+  const copyToClipboard = () => {
+    navigator
+      .clipboard
+      .writeText(`Buenas tardes.${'\n'}Mis actividades de hoy fueron:${'\n'}${activities.map(act => `- ${act.name}\n`).join('')}`)
   }
 
   return (
     <div className='p-6 text-neutral-100 leading-7 flex flex-col gap-4'>
       <div className='mb-1 leading-8'>
-        <h2>Buenas tardes</h2>
+        <div className='flex justify-between'>
+          Good Afternoon!
+          <CopyToClipboardButton onClick={copyToClipboard} />
+        </div>
         <p>
-          Mis actividades de hoy fueron:
+          My tasks were:
         </p>
       </div>
       {
@@ -99,7 +112,7 @@ export const DiaryReportForm = () => {
               activities.map((activity) => (
                 <ActivityItem
                   key={activity.id}
-                  onEdit={startEditing}
+                  onEdit={onEdition}
                   onDelete={onDelete}
                   activity={activity}
                 />
@@ -122,9 +135,9 @@ export const DiaryReportForm = () => {
       <Button
         onClick={onSave}
         disabled={!Boolean(activities.length && !formValues.name.length)}
-        loading={isSubmitting}
+        loading={submitting}
       >
-        Create Report
+        {report ? 'Edit Report' : 'Create Report'}
       </Button>
     </div>
   )

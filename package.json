@@ -11,6 +11,9 @@
   "dependencies": {
     "@supabase/auth-helpers-nextjs": "^0.6.0",
     "@supabase/auth-helpers-react": "^0.3.1",
+    "@tiptap/extension-image": "^2.0.3",
+    "@tiptap/extension-link": "^2.0.3",
+    "@tiptap/extension-placeholder": "^2.0.3",
     "@tiptap/pm": "^2.0.3",
     "@tiptap/react": "^2.0.3",
     "@tiptap/starter-kit": "^2.0.3",
@@ -30,6 +33,7 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
-    "@types/draft-js": "^0.11.10"
+    "@types/draft-js": "^0.11.10",
+    "supabase": "^1.50.11"
   }
 }

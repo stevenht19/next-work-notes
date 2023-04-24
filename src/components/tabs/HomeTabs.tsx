@@ -1,10 +1,8 @@
 import { useState } from 'react'
-import { Tabs, Tab, TabPanel } from '@/components/atoms/Tabs'
-import { Reports } from '@/components/views/Reports'
-import { Weekend } from '@/components/views/Weekend'
 import { HomeProps } from '@/pages'
-import { Grid } from '../atoms/Grid'
-import { Note } from '../notes/Note'
+import { Reports } from '@/components/views/Reports'
+import { Notes } from '@/components/views/Notes'
+import { Tabs, Tab, TabPanel } from '@/components/atoms/Tabs'
 
 export const HomeTabs = ({ notes }: HomeProps) => {
 
@@ -27,13 +25,7 @@ export const HomeTabs = ({ notes }: HomeProps) => {
       <TabPanel index={0} value={value}>
         {
           Boolean(notes.length) && (
-            <Grid>
-              {
-                notes.map((note) => (
-                  <Note key={note.id} {...note} />
-                ))
-              }
-            </Grid>
+            <Notes notes={notes} />
           )
         }
       </TabPanel>
@@ -41,7 +33,7 @@ export const HomeTabs = ({ notes }: HomeProps) => {
         <Reports />
       </TabPanel>
       <TabPanel index={2} value={value}>
-        <Weekend />
+        aaaaa
       </TabPanel>
     </>
   )

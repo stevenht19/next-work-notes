@@ -29,7 +29,7 @@ export const ActivityItem = ({
           onClick={handleSelect}
           icon={
             <AiFillEdit
-              className='fill-neutral-400'
+              className='fill-neutral-400 group-hover:fill-white'
             />
           }
         />
@@ -37,7 +37,7 @@ export const ActivityItem = ({
           onClick={handleDelete}
           icon={
             <AiFillDelete
-              className='fill-neutral-400'
+              className='fill-neutral-400 group-hover:fill-white'
             />
           }
         />

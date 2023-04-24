@@ -12,9 +12,9 @@ type Props = {
 export default function Note({ notes }: Props) {
 
   const note = notes[0]
-
   const onSubmit = async (values: NoteValues) => {
-    console.log(values)
+    await noteService
+      .editNote({ id: note.id, ...values })
   }
 
   return (
@@ -32,10 +32,10 @@ export default function Note({ notes }: Props) {
 
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-
   const { query } = ctx
 
-  const notes = await noteService.findNoteById(Number(query.id))
+  const notes = await noteService
+    .findNoteById(Number(query.id))
 
   return {
     props: {

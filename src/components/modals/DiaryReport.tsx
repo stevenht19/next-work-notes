@@ -1,8 +1,12 @@
 import { Modal, ModalHeader, ModalContent } from '@/components/atoms/Modal'
-import { DiaryReportForm } from '@/components/forms/reports/Diary'
-import { Props } from '@/components/atoms/Modal/types'
+import { Props as ModalProps } from '@/components/atoms/Modal/types'
 
-export const DiaryReport = ({ onClose }: Partial<Props>) => {
+type Props = {
+  children: ModalProps['children']
+  onClose: ModalProps['onClose']
+}
+
+export const DiaryReport = ({ children, onClose }: Props) => {
   return (
     <Modal onClose={onClose!}>
       <ModalContent>
@@ -11,7 +15,7 @@ export const DiaryReport = ({ onClose }: Partial<Props>) => {
             Report
           </h2>
         </ModalHeader>
-        <DiaryReportForm />
+        {children}
       </ModalContent>
     </Modal>
   )

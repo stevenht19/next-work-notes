@@ -7,7 +7,9 @@ import { login } from '@/services/auth/login.service'
 import { useRouter } from 'next/router'
 
 export default function Auth() {
+  
   const router = useRouter()
+
   const { formValues, onChange, handleSubmit, formState } = useForm<Credentials>({
     email: '',
     password: ''
