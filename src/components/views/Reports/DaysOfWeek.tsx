@@ -1,6 +1,6 @@
+import dayjs, { Dayjs } from 'dayjs'
 import { Report } from '@/models/Report.model'
 import { Day } from './Day'
-import dayjs, { Dayjs } from 'dayjs'
 
 export type Props = {
   reports: Report[]
@@ -10,7 +10,7 @@ export type Props = {
 export const DaysOfWeek = ({ reports, startOfWeek }: Props) => {
 
   const days = reports
-    .map(({ created_at }) => { 
+    .map(({ created_at }) => {
       return dayjs(created_at).day()
     })
 
@@ -20,11 +20,13 @@ export const DaysOfWeek = ({ reports, startOfWeek }: Props) => {
         {
           new Array(5)
             .fill('')
-            .map((_, i) => (
+            .map((_, i) => {
+              return startOfWeek.add(i, 'day')
+            })
+            .map((day, i) => (
               <Day
                 key={i}
-                index={i}
-                startOfWeek={startOfWeek}
+                day={day}
                 days={days}
               />
             ))

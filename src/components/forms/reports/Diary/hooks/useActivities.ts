@@ -1,17 +1,18 @@
 import { useState } from 'react'
 import { useBoolean } from '@/hooks'
+import { Report } from '@/models/Report.model'
 import { Activity } from '../types'
 
-const getInitialActivities = (initialActivities?: string): Activity[] => {
+const getInitialActivities = (initialActivities?: Report['activities']): Activity[] => {
   if (!initialActivities) return []
-  console.log(initialActivities)
-  return initialActivities.split(',').map((activity, i) => ({
+
+  return initialActivities.map((activity, i) => ({
     id: i,
     name: activity
   }))
 }
 
-export const useActivities = (initialActivities?: string) => {
+export const useActivities = (initialActivities?: string[]) => {
   const [activities, setActivities] = useState<Activity[]>(getInitialActivities(initialActivities))
   const [editing, setEditing] = useBoolean()
 

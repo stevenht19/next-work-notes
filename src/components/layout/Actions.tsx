@@ -10,7 +10,7 @@ import { Report } from '@/models/Report.model'
 import { useToast } from '@/hooks/useToast'
 import { useReports } from '@/hooks/useReports'
 
-export const Navbar = () => {
+export const Actions = () => {
   const [open, setOpen] = useBoolean()
   const { addReport } = useReports()
   const { onOpen } = useToast()

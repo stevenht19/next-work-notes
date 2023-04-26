@@ -1,16 +1,15 @@
+import { AiOutlinePoweroff } from 'react-icons/ai'
 import { useRouter } from 'next/router'
 import { useBoolean } from '@/hooks'
 import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react'
-import { AiOutlinePoweroff } from 'react-icons/ai'
+import { Menu } from './Menu'
 
 export const Avatar = () => {
-
   const router = useRouter()
   const supabase = useSupabaseClient()
   const user = useUser()
-  const [open, setOpen] = useBoolean()
 
-  if (!user) return null
+  const [open, setOpen] = useBoolean()
 
   const signOut = async () => {
     await supabase.auth.signOut()
@@ -18,31 +17,24 @@ export const Avatar = () => {
   }
 
   return (
-    <div className='relative'>
+    <div>
       <button
+        type='button'
+        data-active={open}
         onClick={setOpen.toggle}
-        className='select-none cursor-pointer bg-yellow-500 font-medium grid place-items-center w-9 h-9 rounded-full'
+        className='select-none cursor-pointer bg-yellow-500 font-medium grid place-items-center w-9 h-9 rounded-full animate-fadeIn'
       >
-        {user.email?.charAt(0).toUpperCase()}
+        {user?.email?.charAt(0).toUpperCase()}
       </button>
-      {
-        open && (
-          <div
-            className='shadow-lg top-full m-2 rounded-md bg-neutral-950 border border-neutral-700 right-0 absolute w-48'
-          >
-            <div className='text-zinc-400 pt-4 px-4'>
-              {user.email}
-            </div>
-            <button
-              className='flex items-center gap-3 font-medium w-full my-2 px-3 py-2 text-zinc-300 hover:bg-neutral-900'
-              onClick={signOut}
-            >
-              <AiOutlinePoweroff size={17} />
-              Sign out
-            </button>
-          </div>
-        )
-      }
+      <Menu open={open} onClose={setOpen.off}>
+        <div className='text-zinc-400 pt-4 px-4'>
+          {user?.email}
+        </div>
+        <Menu.Item onClick={signOut}>
+          <AiOutlinePoweroff size={17} />
+          Sign out
+        </Menu.Item>
+      </Menu>
     </div>
   )
 }

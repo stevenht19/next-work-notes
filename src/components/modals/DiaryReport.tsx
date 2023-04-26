@@ -1,15 +1,10 @@
 import { Modal, ModalHeader, ModalContent } from '@/components/atoms/Modal'
-import { Props as ModalProps } from '@/components/atoms/Modal/types'
-
-type Props = {
-  children: ModalProps['children']
-  onClose: ModalProps['onClose']
-}
+import { Props } from './utils'
 
 export const DiaryReport = ({ children, onClose }: Props) => {
   return (
     <Modal onClose={onClose!}>
-      <ModalContent>
+      <ModalContent size='max-w-xl'>
         <ModalHeader onClose={onClose}>
           <h2 className='font-medium'>
             Report

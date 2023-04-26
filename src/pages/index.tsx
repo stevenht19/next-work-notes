@@ -1,11 +1,11 @@
 import Head from 'next/head'
 import { GetServerSidePropsContext } from 'next'
 import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs'
+import { ReportProvider } from '@/context/Report'
 import { HomeTabs } from '@/components/tabs/HomeTabs'
-import { Navbar } from '@/components/layout/Home/Navbar'
+import { Actions } from '@/components/layout/Actions'
 import { Note } from '@/models/Note.model'
 import { noteService } from '@/services/notes/notes.service'
-import { ReportProvider } from '@/context/Report'
 
 export type HomeProps = {
   notes: Note[]
@@ -18,7 +18,7 @@ export default function Home({ notes }: HomeProps) {
         <title>Home</title>
       </Head>
       <ReportProvider>
-        <Navbar />
+        <Actions />
         <HomeTabs notes={notes} />
       </ReportProvider>
     </>

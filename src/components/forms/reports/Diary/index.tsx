@@ -23,11 +23,13 @@ dayjs.extend(relativeTime)
 dayjs.extend(localeData)
 
 type Props = {
-  report?: Report | null
+  report?: Partial<Report> | null
+  text?: string
   action: (report: Report['activities']) => Promise<void>
 }
 
-export const DiaryReportForm = ({ report, action }: Props) => {
+export const DiaryReportForm = ({ report, text, action }: Props) => {
+  
   const { 
     formValues, 
     onChange, 
@@ -76,12 +78,8 @@ export const DiaryReportForm = ({ report, action }: Props) => {
   const onSave = async () => {
     setSubmitting.on()
 
-    await action(
-      activities
-        .map(({ name }) => name)
-        .join(',')
-    )
-    
+    await action(activities.map(({ name }) => name))
+  
     setSubmitting.off()
   }
 
@@ -112,9 +110,9 @@ export const DiaryReportForm = ({ report, action }: Props) => {
               activities.map((activity) => (
                 <ActivityItem
                   key={activity.id}
+                  activity={activity}
                   onEdit={onEdition}
                   onDelete={onDelete}
-                  activity={activity}
                 />
               ))
             }
@@ -137,7 +135,7 @@ export const DiaryReportForm = ({ report, action }: Props) => {
         disabled={!Boolean(activities.length && !formValues.name.length)}
         loading={submitting}
       >
-        {report ? 'Edit Report' : 'Create Report'}
+        {report ? `${text || 'Edit Report'}` : 'Create Report'}
       </Button>
     </div>
   )

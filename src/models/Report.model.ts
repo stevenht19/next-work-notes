@@ -1,5 +1,5 @@
 export interface Report {
   id: number
-  activities: string
+  activities: string[]
   created_at: Date
 }

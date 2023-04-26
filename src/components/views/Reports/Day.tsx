@@ -1,22 +1,31 @@
-import { Dayjs } from 'dayjs'
+import { useBoolean } from '@/hooks'
+import dayjs, { Dayjs } from 'dayjs'
 
 type Props = {
-  startOfWeek: Dayjs
-  index: number
+  day: Dayjs
   days: number[]
 }
 
-export const Day = ({ startOfWeek, days, index }: Props) => {
+export const Day = ({ day, days }: Props) => {
 
-  const dayOfWeek = startOfWeek.add(index, 'day')
-  const isDayCompleted = days.includes(dayOfWeek.day()) ? 'text-green-200' : 'text-white'
+  const isNotReported = dayjs(day).isBefore(new Date()) && !days.includes(day.day())
+  const isDayCompleted = days.includes(day.day()) ? 'text-green-300' : 'text-white'
+  const dayTitle = day.format('dddd')
+
+  //const [open, setOpen] = useBoolean()
+
+  const onClick = () => {
+    if (!isNotReported) return
+  }
 
   return (
     <button
-      key={dayOfWeek.day()}
-      className={`border border-zinc-800 rounded-full gap-4 w-10 h-10 font-medium grid place-content-center ${isDayCompleted}`}
+      key={day.day()}
+      title={dayTitle}
+      className={`border border-zinc-800 rounded-full gap-4 w-10 h-10 font-medium grid place-content-center ${isNotReported ? 'text-red-400' : isDayCompleted}`}
+      onClick={onClick}
     >
-      {dayOfWeek.format('dddd').charAt(0)}
+      {dayTitle.charAt(0)}
     </button>
   )
 }

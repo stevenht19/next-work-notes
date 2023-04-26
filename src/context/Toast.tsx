@@ -30,11 +30,11 @@ export function ToastProvider({ children }: {
 
     setTimeout(() => {
       setAnimation.off()
-    }, 2000)
+    }, 3000)
 
     setTimeout(() => {
       setToast(null)
-    }, 2200)
+    }, 3200)
   }
 
   return (

@@ -80,6 +80,12 @@ class NoteService {
     }
   }
 
+  async deleteNote(noteId: Note['id']) {
+    return supabase.from('notes')
+      .delete()
+      .eq('id', noteId)
+  }
+
 }
 
 export const noteService = new NoteService()
