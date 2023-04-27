@@ -14,11 +14,10 @@ export async function middleware(req: NextRequest) {
   const redirectUrl = req.nextUrl.clone()
   redirectUrl.pathname = '/auth'
   redirectUrl.searchParams.set(`redirectedFrom`, req.nextUrl.pathname)
-  
   return NextResponse.redirect(redirectUrl)
 
 }
 
 export const config = {
-  matcher: '/'
+  matcher: ['/', '/create-note']
 }

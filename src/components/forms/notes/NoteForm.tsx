@@ -25,8 +25,10 @@ export default function NoteForm({ initialValues, onSubmit }: Props) {
 
   const [modalOpen, setModalOpen] = useBoolean()
   const [loading, setLoading] = useBoolean()
+  const [deleting, setDeleting] = useBoolean()
 
   const onDelete = async () => {
+    setDeleting.on()
     await noteService.deleteNote(initialValues!.id!)
     router.push('/')
   }
@@ -56,11 +58,12 @@ export default function NoteForm({ initialValues, onSubmit }: Props) {
           {
             modalOpen && (
               <AlertDialog
-                title='Delete Notes'
-                confirmButton='Yes'
-                color='bg-red-500 text-white'
+                loading={deleting}
                 onClose={setModalOpen.off}
                 action={onDelete}
+                title='Delete Notes'
+                confirmButton='Delete'
+                color='text-white bg-red-500'
               >
                 {`Are you sure? You can't undo this action afterwards.`}
               </AlertDialog>

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useBoolean } from '@/hooks'
-import { Report } from '@/models/Report.model'
+import { Report } from '@/models/Report'
 import { Activity } from '../types'
 
 const getInitialActivities = (initialActivities?: Report['activities']): Activity[] => {

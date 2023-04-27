@@ -1,4 +1,4 @@
-import { Report } from '@/models/Report.model'
+import { Report } from '@/models/Report'
 import { ReportState } from '../context/Report'
 
 type Action = {

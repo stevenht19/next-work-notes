@@ -16,6 +16,8 @@ export const Avatar = () => {
     router.push('/auth')
   }
 
+  if (!user) return null
+
   return (
     <div>
       <button

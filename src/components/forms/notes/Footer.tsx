@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Editor } from '@tiptap/react'
-import { Report } from '@/models/Report.model'
+import { Report } from '@/models/Report'
 import { Button } from '@/components/atoms/Button'
 import { DiaryReport } from '@/components/modals/DiaryReport'
 import { DiaryReportForm } from '../reports/Diary'

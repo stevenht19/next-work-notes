@@ -4,7 +4,7 @@ import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { ReportProvider } from '@/context/Report'
 import { HomeTabs } from '@/components/tabs/HomeTabs'
 import { Actions } from '@/components/layout/Actions'
-import { Note } from '@/models/Note.model'
+import { Note } from '@/models/Note'
 import { noteService } from '@/services/notes/notes.service'
 
 export type HomeProps = {
@@ -26,7 +26,6 @@ export default function Home({ notes }: HomeProps) {
 }
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-
   const supabase = createServerSupabaseClient(ctx)
   const { data: { user } } = await supabase.auth.getUser()
 

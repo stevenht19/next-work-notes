@@ -3,7 +3,7 @@ import { Grid } from '@/components/atoms/Grid'
 import { Card } from '@/components/atoms/Card'
 import { DiaryReport } from '@/components/modals/DiaryReport'
 import { DiaryReportForm } from '@/components/forms/reports/Diary'
-import { Report } from '@/models/Report.model'
+import { Report } from '@/models/Report'
 import { reportService } from '@/services/reports/report.service'
 import { useReport } from './hooks/useReport'
 import { useReports } from './hooks/useReports'
@@ -14,10 +14,9 @@ import isoWeek from 'dayjs/plugin/isoWeek'
 
 dayjs.extend(isoWeek)
 
-export const Reports = () => {
+export default function Reports() {
 
   const { startOfWeek, endOfWeek } = getDates()
-
   const { report, onSelect, onClear } = useReport()
   
   const { reports, editReport } = useReports({
@@ -55,6 +54,7 @@ export const Reports = () => {
           <Card
             title={`Report ${dayjs(props.created_at).format('dddd')}`}
             id={props.id}
+            key={props.id}
             created_at={props.created_at}
             onClick={() => onSelect(props)}
             icon={

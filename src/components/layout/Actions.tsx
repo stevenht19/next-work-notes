@@ -1,24 +1,28 @@
-import { Fragment } from 'react'
 import { useBoolean } from '@/hooks'
+import { Report } from '@/models/Report'
 import { Badge } from '@/components/atoms/Badge'
 import { Button } from '@/components/buttons/AddButton'
 import { Typography } from '@/components/atoms/Typography'
-import { DiaryReport } from '@/components/modals/DiaryReport'
 import { DiaryReportForm } from '@/components/forms/reports/Diary'
 import { reportService } from '@/services/reports/report.service'
-import { Report } from '@/models/Report.model'
 import { useToast } from '@/hooks/useToast'
 import { useReports } from '@/hooks/useReports'
+import dynamic from 'next/dynamic'
+
+const DailyReportModal = dynamic(() => import('@/components/modals/DiaryReport'), {
+  loading: () => null
+})
 
 export const Actions = () => {
   const [open, setOpen] = useBoolean()
+  
   const { addReport } = useReports()
   const { onOpen } = useToast()
 
   const onSubmit = async (activities: Report['activities']) => {
     try {
       const report = await reportService
-        .createReport(activities)
+        .createReport({ activities })
 
       addReport(report!)
 
@@ -36,7 +40,7 @@ export const Actions = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <div className='flex items-center gap-4'>
         <Typography.h2>
           Welcome
@@ -56,11 +60,11 @@ export const Actions = () => {
       </div>
       {
         open && (
-          <DiaryReport onClose={setOpen.off}>
+          <DailyReportModal onClose={setOpen.off} size='max-w-lg'>
             <DiaryReportForm action={onSubmit} />
-          </DiaryReport>
+          </DailyReportModal>
         )
       }
-    </Fragment>
+    </>
   )
 }

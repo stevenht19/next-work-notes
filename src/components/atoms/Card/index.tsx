@@ -10,13 +10,14 @@ type Props = {
   icon: React.ReactNode
   id: number
   title: string
-  created_at: Date
+  created_at: string
   onClick?: () => void
 }
 
 export const Card = (props: Props) => {
 
   const { path, id, icon, title, created_at, onClick } = props
+
   const date = dayjs(created_at).calendar()
   const className = 'rounded-md border border-zinc-900 p-4 hover:bg-zinc-900/10'
 

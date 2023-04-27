@@ -1,10 +1,10 @@
 import { Modal, ModalHeader, ModalContent } from '@/components/atoms/Modal'
 import { Props } from './utils'
 
-export const DiaryReport = ({ children, onClose }: Props) => {
+export const DiaryReport = ({ size, children, onClose }: Props) => {
   return (
     <Modal onClose={onClose!}>
-      <ModalContent size='max-w-xl'>
+      <ModalContent size={size ?? 'max-w-xl'}>
         <ModalHeader onClose={onClose}>
           <h2 className='font-medium'>
             Report
@@ -15,3 +15,5 @@ export const DiaryReport = ({ children, onClose }: Props) => {
     </Modal>
   )
 }
+
+export default DiaryReport

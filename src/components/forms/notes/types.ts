@@ -1,4 +1,4 @@
-import { Note } from '@/models/Note.model'
+import { Note } from '@/models/Note'
 
 export type Props = {
   initialValues?: NoteValues

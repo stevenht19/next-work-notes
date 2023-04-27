@@ -1,4 +1,4 @@
-import { Report } from '@/models/Report.model'
+import { Report } from '@/models/Report'
 import { useState } from 'react'
 
 export const useReport = () => {

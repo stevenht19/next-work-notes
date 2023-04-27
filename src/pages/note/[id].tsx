@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { GetServerSidePropsContext } from 'next'
-import { Note } from '@/models/Note.model'
+import { Note } from '@/models/Note'
 import { NoteForm } from '@/components/forms/notes'
 import { noteService } from '@/services/notes/notes.service'
 import { NoteValues } from '@/components/forms/notes/types'

@@ -1,5 +1,5 @@
 import dayjs, { Dayjs } from 'dayjs'
-import { Report } from '@/models/Report.model'
+import { Report } from '@/models/Report'
 import { Day } from './Day'
 
 export type Props = {

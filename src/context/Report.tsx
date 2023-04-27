@@ -1,5 +1,5 @@
 import { createContext, useReducer } from 'react'
-import { Report } from '@/models/Report.model'
+import { Report } from '@/models/Report'
 import { reportsReducer } from '@/reducers/reportsReducer'
 
 export interface ReportState {

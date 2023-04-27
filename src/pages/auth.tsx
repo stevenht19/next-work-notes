@@ -3,8 +3,9 @@ import { Input } from '@/components/atoms/Input'
 import { Typography } from '@/components/atoms/Typography'
 import { Button } from '@/components/atoms/Button'
 import { Credentials } from '@/services/auth/utils'
-import { login } from '@/services/auth/login.service'
 import { useRouter } from 'next/router'
+import { signUp } from '@/services/auth/signup.service'
+import { login } from '@/services/auth/login.service'
 
 export default function Auth() {
   
@@ -19,6 +20,7 @@ export default function Auth() {
 
   const onSubmit: SubmitHandler<Credentials> = async (data) => {
     await login(data)
+    //await signUp(data)
     router.push('/')
   }
 

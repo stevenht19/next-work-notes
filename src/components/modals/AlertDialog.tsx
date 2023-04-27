@@ -5,6 +5,7 @@ import { Props as ModalProps } from './utils'
 type Props = ModalProps & {
   title: string
   color?: string
+  loading?: boolean
   confirmButton: string
   action?: () => void
 }
@@ -12,8 +13,9 @@ type Props = ModalProps & {
 export const AlertDialog = ({
   title,
   color,
-  confirmButton,
+  loading,
   children,
+  confirmButton,
   action,
   onClose
 }: Props) => {
@@ -30,6 +32,7 @@ export const AlertDialog = ({
           {
             action ? (
               <Button
+                loading={loading}
                 color={color}
                 onClick={action}
               >

@@ -1,8 +1,13 @@
 import { useState } from 'react'
 import { HomeProps } from '@/pages'
-import { Reports } from '@/components/views/Reports'
-import { Notes } from '@/components/views/Notes'
 import { Tabs, Tab, TabPanel } from '@/components/atoms/Tabs'
+import { Typography } from '@/components/atoms/Typography'
+import { Notes } from '@/components/views/Notes'
+import dynamic from 'next/dynamic'
+
+const Reports = dynamic(() => import('@/components/views/Reports'), {
+  loading: () => <Typography>Loading...</Typography>
+})
 
 export const HomeTabs = ({ notes }: HomeProps) => {
 

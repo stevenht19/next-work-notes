@@ -1,10 +1,13 @@
+import { Typography } from '../Typography'
 import { Props } from './types'
 
 const ModalBody = ({ children }: Props) => {
   return (
-    <p className='px-6 text-zinc-400'>
-      {children}
-    </p>
+    <div className='px-6'>
+      <Typography>
+        {children}
+      </Typography>
+    </div>
   )
 }
 

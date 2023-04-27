@@ -1,4 +1,4 @@
-import { Note } from '@/models/Note.model'
+import { Note } from '@/models/Note'
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 
 const supabase = createBrowserSupabaseClient()
