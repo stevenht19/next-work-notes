@@ -1,38 +1,41 @@
-import { Report } from '@/models/Report'
+import { getDates, toISOString } from '@/utils/getWeekDates'
+import { CreateReport, UpdateReport } from '@/models/Report'
+import { Database } from '@/models/supabase'
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import dayjs from 'dayjs'
 
-const supabase = createBrowserSupabaseClient()
+const supabase = createBrowserSupabaseClient<Database>()
 
 class ReportService {
+  async getReports() {
 
-  async getReports(from: string, until: string): Promise<Report[]> {
+    const { startOfWeek, endOfWeek } = getDates()
+
+    const auth = await supabase.auth.getUser()
     const { data } = await supabase
       .from('reports')
       .select()
-      .gt('created_at', from)
-      .lt('created_at', until)
+      .gt('created_at', toISOString(startOfWeek))
+      .lt('created_at', toISOString(endOfWeek))
+      .eq('user_id', auth.data.user?.id)
 
-    console.log(from)
-
-    return data as Report[] ?? []
+    return data ?? []
   }
 
-  async createReport(report: Partial<Report>) {
+  async createReport(report: CreateReport) {
     try {
-
       if (!report?.created_at) {
-        const { data } = await supabase.from('reports')
+        const reportToFind = await supabase.from('reports')
         .select()
         .gt('created_at', dayjs().hour(0).minute(0).second(0))
         .lt('created_at', dayjs().add(1, 'day'))
 
-        if (data?.length) {
-          throw new Error('You have actually a report today')
+        if (reportToFind.data?.length) {
+          throw new Error('You have already made a report today.')
         }
       } 
 
-      const { data: savedReport, error } = await supabase
+      const { data, error } = await supabase
         .from('reports')
         .insert(report)
         .select()
@@ -41,7 +44,7 @@ class ReportService {
         throw new Error(error.message)
       }
 
-      return savedReport as unknown as Report
+      return data[0]
 
     } catch (err) {
       if (err instanceof Error)
@@ -49,7 +52,7 @@ class ReportService {
     }
   }
 
-  async editReport(report: Partial<Report>) {
+  async editReport(report: UpdateReport) {
     try {
       const { data, error } = await supabase
         .from('reports')
@@ -61,7 +64,7 @@ class ReportService {
         throw new Error(error.message)
       }
 
-      return data[0] as unknown as Report
+      return data[0]
 
     } catch (err) {
       if (err instanceof Error)

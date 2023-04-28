@@ -17,6 +17,8 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import localeData from 'dayjs/plugin/localeData'
 import { CopyToClipboardButton } from '@/components/buttons/CopyToClipboardButton'
+import { Typography } from '@/components/atoms/Typography'
+import { Tips } from './Tips'
 
 dayjs.locale('en')
 dayjs.extend(relativeTime)
@@ -29,11 +31,11 @@ type Props = {
 }
 
 export const DiaryReportForm = ({ report, text, action }: Props) => {
-  
-  const { 
-    formValues, 
-    onChange, 
-    handleSubmit, 
+
+  const {
+    formValues,
+    onChange,
+    handleSubmit,
     clearForm,
     replace
   } = useForm<Activity>({
@@ -44,13 +46,13 @@ export const DiaryReportForm = ({ report, text, action }: Props) => {
   const { onFocus, onBlur } = useModal()
 
   const {
-    activities, 
+    activities,
     editing,
-    onAdd, 
-    onEdit, 
-    onDelete, 
-    startEditing, 
-    stopEditing 
+    onAdd,
+    onEdit,
+    onDelete,
+    startEditing,
+    stopEditing
   } = useActivities(report?.activities)
 
   const [submitting, setSubmitting] = useBoolean()
@@ -79,7 +81,7 @@ export const DiaryReportForm = ({ report, text, action }: Props) => {
     setSubmitting.on()
 
     await action(activities.map(({ name }) => name))
-  
+
     setSubmitting.off()
   }
 
@@ -91,15 +93,7 @@ export const DiaryReportForm = ({ report, text, action }: Props) => {
 
   return (
     <div className='p-6 text-neutral-100 leading-7 flex flex-col gap-4'>
-      <div className='mb-1 leading-8'>
-        <div className='flex justify-between'>
-          Good Afternoon!
-          <CopyToClipboardButton onClick={copyToClipboard} />
-        </div>
-        <p>
-          My tasks were:
-        </p>
-      </div>
+      <Tips />
       {
         Boolean(activities.length) && (
           <ul

@@ -1,5 +1,6 @@
 import { Modal, ModalHeader, ModalContent } from '@/components/atoms/Modal'
 import { Props } from './utils'
+import { Typography } from '../atoms/Typography'
 
 export const DiaryReport = ({ size, children, onClose }: Props) => {
   return (
@@ -9,6 +10,8 @@ export const DiaryReport = ({ size, children, onClose }: Props) => {
           <h2 className='font-medium'>
             Report
           </h2>
+          <Typography>
+        </Typography>
         </ModalHeader>
         {children}
       </ModalContent>

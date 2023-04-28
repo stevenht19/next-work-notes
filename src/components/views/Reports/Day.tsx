@@ -5,8 +5,8 @@ import { useReports } from '@/hooks/useReports'
 import { useToast } from '@/hooks/useToast'
 import { Report } from '@/models/Report'
 import { reportService } from '@/services/reports/report.service'
+import { toISOString } from '@/utils/getWeekDates'
 import dayjs, { Dayjs } from 'dayjs'
-import { toISOString } from './utils'
 
 type Props = {
   day: Dayjs

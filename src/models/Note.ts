@@ -1,7 +1,3 @@
-export interface Note {
-  id: number
-  title: string
-  content: string
-  created_at: Date
-  user_id: string
-}
+import { Database } from './supabase'
+
+export type Note = Database['public']['Tables']['notes']['Row']

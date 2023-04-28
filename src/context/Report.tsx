@@ -7,7 +7,7 @@ export interface ReportState {
 }
 
 export interface ReportContext extends ReportState {
-  setReports(reports: Report[]): void
+  setReports(reports: any): any
   addReport(report: Report): void
   editReport(report: Report): void
 }
@@ -34,6 +34,8 @@ export function ReportProvider({ children }: {
       type: 'set_reports',
       payload: reports
     })
+    
+    return () => reportsState.reports 
   }
 
   function addReport(report: Report) {

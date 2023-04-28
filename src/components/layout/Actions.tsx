@@ -15,7 +15,7 @@ const DailyReportModal = dynamic(() => import('@/components/modals/DiaryReport')
 
 export const Actions = () => {
   const [open, setOpen] = useBoolean()
-  
+
   const { addReport } = useReports()
   const { onOpen } = useToast()
 
@@ -32,7 +32,6 @@ export const Actions = () => {
           type: 'error',
           message: err.message
         })
-        setOpen.off()
       }
     } finally {
       setOpen.off()
@@ -52,10 +51,7 @@ export const Actions = () => {
           Quick Notes
         </Button>
         <Button onClick={setOpen.on}>
-          Diary Report
-        </Button>
-        <Button path='/notes'>
-          Weekend Report
+          Daily Report
         </Button>
       </div>
       {

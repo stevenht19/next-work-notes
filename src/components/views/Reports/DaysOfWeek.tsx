@@ -15,7 +15,7 @@ export const DaysOfWeek = ({ reports, startOfWeek }: Props) => {
     })
 
   return (
-    <div className='pb-6'>
+    <div className='pb-8'>
       <div className='flex gap-6'>
         {
           new Array(5)

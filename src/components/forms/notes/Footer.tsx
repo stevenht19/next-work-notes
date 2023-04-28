@@ -1,11 +1,13 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
+import { MdSaveAlt } from 'react-icons/md'
+import { HiOutlineInformationCircle } from 'react-icons/hi'
 import { Editor } from '@tiptap/react'
 import { Report } from '@/models/Report'
 import { Button } from '@/components/atoms/Button'
-import { DiaryReport } from '@/components/modals/DiaryReport'
-import { DiaryReportForm } from '../reports/Diary'
-import { useRouter } from 'next/router'
 import { reportService } from '@/services/reports/report.service'
+import { DiaryReport } from '@/components/modals/DiaryReport'
+import { DiaryReportForm } from '@/components/forms/reports/Diary'
 
 type Props = {
   loading: boolean
@@ -27,18 +29,22 @@ export const Footer = ({ loading, editor, onSave }: Props) => {
   }
 
   const createReport = async (activities: Report['activities']) => {
-    await reportService.createReport(activities)
+    await reportService.createReport({ activities })
     router.push('/')
   }
 
   return (
     <footer className='flex pb-7 gap-6'>
-      <Button onClick={onOpen}>
+      <Button
+        onClick={onOpen}
+        icon={<HiOutlineInformationCircle size={22} />}
+      >
         Generate Report
       </Button>
       <Button
         loading={loading}
         onClick={onSave}
+        icon={<MdSaveAlt size={21} />}
       >
         Save
       </Button>

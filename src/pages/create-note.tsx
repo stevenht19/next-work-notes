@@ -5,6 +5,7 @@ import { noteService } from '@/services/notes/notes.service'
 import { useUser } from '@supabase/auth-helpers-react'
 
 export default function Notes() {
+  
   const user = useUser()
 
   const onCreate = async (note: NoteValues) => {

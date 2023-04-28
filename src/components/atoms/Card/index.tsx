@@ -19,7 +19,7 @@ export const Card = (props: Props) => {
   const { path, id, icon, title, created_at, onClick } = props
 
   const date = dayjs(created_at).calendar()
-  const className = 'rounded-md border border-zinc-900 p-4 hover:bg-zinc-900/10'
+  const className = 'rounded-md outline outline-1 outline-zinc-900 p-4 hover:outline-2'
 
   if (!path) {
     return (

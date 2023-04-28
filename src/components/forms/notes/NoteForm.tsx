@@ -39,7 +39,7 @@ export default function NoteForm({ initialValues, onSubmit }: Props) {
     setLoading.on()
 
     onSubmit({
-      title: value?.length ? value : 'My Notes Title',
+      title: value?.length ? value : 'Untitled',
       content: editor?.getHTML()
     })
 

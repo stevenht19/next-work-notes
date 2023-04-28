@@ -1,20 +1,38 @@
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import { reportService } from '@/services/reports/report.service'
 import { ReportContext } from '@/context/Report'
+import { Report } from '@/models/Report'
 
-type DateRange = {
-  from: string
-  until: string
-}
+export const useReports = () => {
 
-export const useReports = ({ from, until }: DateRange) => {
   const { reports, editReport, setReports } = useContext(ReportContext)
+  const [report, setReport] = useState<Report | null>(null)
 
   useEffect(() => {
     reportService
-      .getReports(from, until)
+      .getReports()
       .then(setReports)
   }, [])
 
-  return { reports, editReport }
+  const onEdit = (report: Report) => {
+    editReport(report)
+    onClear()
+  }
+
+  const onSelect = (report: Report) => {
+    setReport(report)
+  }
+
+  const onClear = () => {
+    setReport(null)
+  }
+
+  return {
+    report,
+    reports,
+    editReport,
+    onSelect,
+    onEdit,
+    onClear
+  }
 }

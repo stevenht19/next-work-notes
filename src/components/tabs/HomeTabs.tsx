@@ -3,6 +3,7 @@ import { HomeProps } from '@/pages'
 import { Tabs, Tab, TabPanel } from '@/components/atoms/Tabs'
 import { Typography } from '@/components/atoms/Typography'
 import { Notes } from '@/components/views/Notes'
+import { Weekend } from '@/components/views/Weekend'
 import dynamic from 'next/dynamic'
 
 const Reports = dynamic(() => import('@/components/views/Reports'), {
@@ -38,7 +39,7 @@ export const HomeTabs = ({ notes }: HomeProps) => {
         <Reports />
       </TabPanel>
       <TabPanel index={2} value={value}>
-        aaaaa
+        <Weekend />
       </TabPanel>
     </>
   )
