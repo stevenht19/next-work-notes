@@ -1,8 +1,14 @@
+import Link from 'next/link'
 import { Avatar } from '@/components/atoms/Avatar'
 import { GiSlumberingSanctuary } from 'react-icons/gi'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { Routes } from '@/utils/routes'
 
 export const Header = () => {
+
+  const { pathname } = useRouter()
+
+  const isInAuthPage = pathname === Routes.SIGN_UP || pathname === Routes.LOGIN
 
   return (
     <header
@@ -14,7 +20,11 @@ export const Header = () => {
           className='fill-zinc-100' 
         />
       </Link>
-      <Avatar />
+      {
+        !isInAuthPage && (
+          <Avatar />
+        )
+      }
     </header>
   )
 }

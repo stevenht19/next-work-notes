@@ -8,7 +8,7 @@ dayjs.extend(calendar)
 type Props = {
   path?: string
   icon: React.ReactNode
-  id: number
+  id: number | string
   title: string
   created_at: string
   onClick?: () => void

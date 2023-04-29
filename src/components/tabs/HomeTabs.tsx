@@ -1,11 +1,11 @@
+import dynamic from 'next/dynamic'
 import { useState } from 'react'
 import { HomeProps } from '@/pages'
 import { Tabs, Tab, TabPanel } from '@/components/atoms/Tabs'
 import { Typography } from '@/components/atoms/Typography'
 import { Notes } from '@/components/views/Notes'
 import { Weekend } from '@/components/views/Weekend'
-import { Workgroup } from '@/components/views/Workgroup'
-import dynamic from 'next/dynamic'
+import { Workgroup } from '@/components/views/Team'
 
 const Reports = dynamic(() => import('@/components/views/Reports'), {
   loading: () => <Typography>Loading...</Typography>

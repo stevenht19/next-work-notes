@@ -1,4 +1,5 @@
 export type Props<T> = {
-  items: T[]
-  renderItem: (props: T, i: number) => React.ReactNode
+  items?: T[]
+  children?: React.ReactNode
+  renderItem?: (props: T, i: number) => React.ReactNode
 }

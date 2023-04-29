@@ -1,20 +1,22 @@
+import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react'
 import { AiOutlinePoweroff } from 'react-icons/ai'
 import { useRouter } from 'next/router'
 import { useBoolean } from '@/hooks'
-import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react'
 import { Menu } from './Menu'
 
 export const Avatar = () => {
-  const router = useRouter()
-  const supabase = useSupabaseClient()
-  const user = useUser()
 
   const [open, setOpen] = useBoolean()
   const [loggingOut, setLoggingOut] = useBoolean()
 
+  const router = useRouter()
+  const supabase = useSupabaseClient()
+  const user = useUser()
+
   const signOut = async () => {
     setLoggingOut.on()
     await supabase.auth.signOut()
+
     router.push('/login')
   }
 

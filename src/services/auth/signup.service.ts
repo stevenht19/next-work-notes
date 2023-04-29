@@ -2,8 +2,6 @@ import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { Credentials } from './utils'
 
 export const signUp = async (credentials: Credentials) => {
-  console.log(credentials)
-
   try {
 
     const supabase = createBrowserSupabaseClient()

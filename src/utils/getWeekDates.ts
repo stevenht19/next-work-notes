@@ -8,8 +8,6 @@ export const getDates = () => {
     .second(0)
     .millisecond(0)
 
-  console.log(startOfWeek)
-
   const endOfWeek = dayjs().endOf('week')
 
   return {

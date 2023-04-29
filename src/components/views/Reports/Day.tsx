@@ -6,6 +6,7 @@ import { useToast } from '@/hooks/useToast'
 import { Report } from '@/models/Report'
 import { reportService } from '@/services/reports/report.service'
 import { toISOString } from '@/utils/getWeekDates'
+import { useUser } from '@supabase/auth-helpers-react'
 import dayjs, { Dayjs } from 'dayjs'
 
 type Props = {
@@ -15,6 +16,7 @@ type Props = {
 
 export const Day = ({ day, days }: Props) => {
 
+  const user = useUser()
   const dayTitle = day.format('dddd')
   const isNotReported = dayjs(day).isBefore(new Date()) && !days.includes(day.day())
   const isDayCompleted = days.includes(day.day()) ? 'text-green-300' : 'text-white'
@@ -34,7 +36,8 @@ export const Day = ({ day, days }: Props) => {
       const report = await reportService
         .createReport({ 
           activities, 
-          created_at: toISOString(dayjs(day).hour(dayjs().hour())) 
+          created_at: toISOString(dayjs(day).hour(dayjs().hour())),
+          user_id: user?.id
         })
 
       if (report)

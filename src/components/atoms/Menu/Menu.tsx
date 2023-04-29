@@ -10,7 +10,10 @@ type Props = {
 const Menu = ({ open, children, onClose }: Props) => {
   const ref = useRef<HTMLDivElement>(null)
 
+  console.log('ññññ')
+
   useEffect(() => {
+
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement
 

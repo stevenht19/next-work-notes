@@ -1,7 +1,7 @@
+import Head from 'next/head'
 import { AuthForm } from '@/components/forms/auth'
 import { login } from '@/services/auth/login.service'
 import { Credentials } from '@/services/auth/utils'
-import Head from 'next/head'
 
 export default function Login() {
 
