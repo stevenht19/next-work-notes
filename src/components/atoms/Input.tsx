@@ -9,7 +9,7 @@ export type Props = {
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void
 }
 
-const className = 'bg-neutral-800/50 rounded-md px-3 py-2 w-full placeholder:text-neutral-600/70 outline-none focus:bg-neutral-800/90 focus:outline-1 focus:outline-neutral-400'
+const className = 'bg-transparent outline-1 outline-zinc-800 rounded-sm px-3 py-2 w-full placeholder:text-zinc-600 outline-none focus:outline-zinc-500'
 
 export const Input = ({
   value,
@@ -23,7 +23,7 @@ export const Input = ({
     <div>
       {
         label && (
-          <label className='block mb-2.5'>
+          <label className='block mb-3.5'>
             {label}
           </label>
         )

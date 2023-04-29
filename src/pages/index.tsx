@@ -6,6 +6,7 @@ import { HomeTabs } from '@/components/tabs/HomeTabs'
 import { Actions } from '@/components/layout/Actions'
 import { Note } from '@/models/Note'
 import { noteService } from '@/services/notes/notes.service'
+import { Header } from '@/components/layout/Header'
 
 export type HomeProps = {
   notes: Note[]

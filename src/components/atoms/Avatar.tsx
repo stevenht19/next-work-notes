@@ -10,10 +10,12 @@ export const Avatar = () => {
   const user = useUser()
 
   const [open, setOpen] = useBoolean()
+  const [loggingOut, setLoggingOut] = useBoolean()
 
   const signOut = async () => {
+    setLoggingOut.on()
     await supabase.auth.signOut()
-    router.push('/auth')
+    router.push('/login')
   }
 
   if (!user) return null
@@ -34,7 +36,9 @@ export const Avatar = () => {
         </div>
         <Menu.Item onClick={signOut}>
           <AiOutlinePoweroff size={17} />
-          Sign out
+          {
+            loggingOut ? 'Logging out...' : 'Sign out'
+          }
         </Menu.Item>
       </Menu>
     </div>

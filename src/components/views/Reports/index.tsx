@@ -20,9 +20,11 @@ export default function Reports() {
   const { reports, report, editReport, onSelect, onClear } = useReports()
 
   const onSubmit = async (activities: Report['activities']) => {
-    reportService
+    const data = await reportService
       .editReport({ id: report!.id, activities })
-      .then((data) => editReport(data!))
+      
+    editReport(data!)
+    onClear()
   }
 
   return (

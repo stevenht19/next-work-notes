@@ -21,8 +21,8 @@ export const Button = ({
 }: Props) => {
 
   const withIcon = icon ? 'gap-4 w-fit pl-4 pr-8 items-center' : 'justify-center px-7 '
-  const disabledClassName = disabled || loading ? `bg-white/40 cursor-not-allowed` : `${color || 'bg-white'} cursor-pointer`
-  const className = 'flex py-2 text-md font-normal rounded-md text-neutral-900 mt-4 mb-3 min-w-[7.5rem]'
+  const disabledClassName = disabled || loading ? `bg-white/40 cursor-not-allowed justify-center` : `${color || 'bg-white'} cursor-pointer`
+  const className = 'flex py-2 text-md font-normal rounded-md text-neutral-900 mt-4 min-w-[7.5rem]'
 
   return (
     <button

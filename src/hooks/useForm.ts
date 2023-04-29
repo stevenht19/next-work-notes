@@ -3,6 +3,8 @@ import useBoolean from './useBoolean'
 
 export type SubmitHandler<T> = (data: T) => Promise<void> | void
 
+type HandleSubmitType<T> = (onSubmit: SubmitHandler<T>) => (e: React.FormEvent<HTMLFormElement>) => Promise<void>
+
 export const useForm = <T, >(initialValues: T) => {
   const [formValues, setValues] = useState<T>(initialValues)
   const [error, setError] = useState<string | null>(null)
@@ -24,13 +26,12 @@ export const useForm = <T, >(initialValues: T) => {
     })
   }
 
-  const handleSubmit = (onSubmit: SubmitHandler<T>) => (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit: HandleSubmitType<T> = (onSubmit) => async (e) => {
     e.preventDefault()
 
     try {
- 
       setSubmitting.on()
-      onSubmit(formValues)
+      await onSubmit(formValues)
 
     } catch(err) {
       if (err instanceof Error) {

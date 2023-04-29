@@ -5,13 +5,12 @@ export const login = async (credentials: Credentials) => {
   try {
     const supabase = createBrowserSupabaseClient()
 
-    const { data, error } = await supabase.auth.signInWithPassword(credentials)
+    const { error } = await supabase.auth.signInWithPassword(credentials)
   
     if (error) {
       throw new Error(error.message)
     }
 
-    return data
   } catch (err) {
     if (err instanceof Error)
       throw new Error(err.message)

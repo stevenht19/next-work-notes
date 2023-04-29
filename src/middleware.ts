@@ -12,7 +12,7 @@ export async function middleware(req: NextRequest) {
   }
 
   const redirectUrl = req.nextUrl.clone()
-  redirectUrl.pathname = '/auth'
+  redirectUrl.pathname = '/login'
   redirectUrl.searchParams.set(`redirected_uri`, req.nextUrl.pathname)
   
   return NextResponse.redirect(redirectUrl)
