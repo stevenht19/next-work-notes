@@ -85,12 +85,6 @@ export const DiaryReportForm = ({ report, text, action }: Props) => {
     setSubmitting.off()
   }
 
-  const copyToClipboard = () => {
-    navigator
-      .clipboard
-      .writeText(`Buenas tardes.${'\n'}Mis actividades de hoy fueron:${'\n'}${activities.map(act => `- ${act.name}\n`).join('')}`)
-  }
-
   return (
     <div className='p-6 text-neutral-100 leading-7 flex flex-col gap-4'>
       <Tips />

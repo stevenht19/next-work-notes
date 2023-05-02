@@ -28,10 +28,11 @@ export const Workgroup = () => {
             title={`${props.username}`}
             onClick={() => onSelect(props)}
             created_at={new Date().toString()}
-            icon={
-              <AiOutlineUser
-                size={22}
-                className='mb-1 fill-neutral-300' />
+            avatar={
+              <div className='bg-white uppercase text-zinc-950 w-8 h-8 font-medium mb-2 rounded-full grid place-content-center'>
+                Hacer commit fix get reports
+                {props.username?.at(0)}
+              </div>
             }
           />
         )}

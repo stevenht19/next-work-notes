@@ -1,19 +1,24 @@
 import dayjs, { Dayjs } from 'dayjs'
 
 export const getDates = () => {
+  
   const startOfWeek = dayjs()
-    .date(dayjs().startOf('week').date() + 1)
-    .hour(0)
-    .minute(0)
-    .second(0)
-    .millisecond(0)
+    .startOf('week').add(1, 'day')
 
-  const endOfWeek = dayjs().endOf('week')
+  const endOfWeek = dayjs()
+    .endOf('week')
 
   return {
     startOfWeek,
     endOfWeek
   }
+}
+
+export const isWorkday = (date: string) => {
+
+  const actualDay = dayjs(date).format('dddd')
+
+  return actualDay == 'Sunday' || actualDay == 'Saturday'
 }
 
 export const toISOString = (date: Dayjs) => date.toISOString() 

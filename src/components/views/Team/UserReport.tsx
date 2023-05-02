@@ -19,13 +19,13 @@ export const UserReport = ({ userId }: Props) => {
 
   return (
     <div className='p-6'>
-      <div className='overflow-y-auto max-h-72'>
+      <div className='overflow-y-auto max-h-80'>
         {
           reports.length ?
           reports?.map((report, i) => (
             <div key={i}>
               <h2 className='font-semibold my-2 text-sm'>{dayjs(report.created_at).format('dddd')} {dayjs(report.created_at).format('DD/MM/YYYY')}</h2>
-              <ul className='pl-2 list-disc text-zinc-200 text-sm'>
+              <ul className='pl-2 list-disc text-zinc-200 text-sm leading-7'>
                 {report.activities.map((act) => (
                   <li key={i}>
                     - {act}
@@ -35,6 +35,7 @@ export const UserReport = ({ userId }: Props) => {
             </div>
           )) : (
             <Typography>
+              {`User haven't made reports during the week.`}
             </Typography>
           )
         }

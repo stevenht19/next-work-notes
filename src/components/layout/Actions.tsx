@@ -8,21 +8,26 @@ import { reportService } from '@/services/reports/report.service'
 import { useToast } from '@/hooks/useToast'
 import { useReports } from '@/hooks/useReports'
 import dynamic from 'next/dynamic'
+import { useUser } from '@supabase/auth-helpers-react'
+import { useRouter } from 'next/router'
 
 const DailyReportModal = dynamic(() => import('@/components/modals/DiaryReport'), {
   loading: () => null
 })
 
 export const Actions = () => {
+  const router = useRouter()
   const [open, setOpen] = useBoolean()
 
   const { addReport } = useReports()
   const { onOpen } = useToast()
 
+  const user = useUser()
+
   const onSubmit = async (activities: Report['activities']) => {
     try {
       const report = await reportService
-        .createReport({ activities })
+        .createReport({ activities, user_id: user?.id })
 
       addReport(report!)
 

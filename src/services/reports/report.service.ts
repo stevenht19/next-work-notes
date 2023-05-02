@@ -1,4 +1,4 @@
-import { getDates, toISOString } from '@/utils/getWeekDates'
+import { getDates, isWorkday, toISOString } from '@/utils/getWeekDates'
 import { CreateReport, UpdateReport } from '@/models/Report'
 import { Database } from '@/models/supabase'
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
@@ -13,6 +13,7 @@ class ReportService {
     const { startOfWeek, endOfWeek } = getDates()
 
     const auth = await supabase.auth.getUser()
+    
     const { data } = await supabase
       .from('reports')
       .select()
@@ -21,15 +22,15 @@ class ReportService {
       .eq('user_id', auth.data.user?.id)
       .order('created_at', { ascending: true })
 
+    console.log(toISOString(startOfWeek),toISOString(endOfWeek),  auth)
     return data ?? []
   }
 
   async createReport(report: CreateReport) {
     try {
+      const restDay = isWorkday(report?.created_at ?? toISOString(dayjs()))
 
-      const actualDay = dayjs(report?.created_at).format('dddd')
-
-      if (actualDay == 'Sunday' || actualDay == 'Saturday') {
+      if (restDay) {
         throw new Error('Today is not a workday')
       }
 

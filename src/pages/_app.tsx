@@ -4,6 +4,7 @@ import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { ToastProvider } from '@/context/Toast'
 import { Layout } from '@/components/layout'
 import type { AppProps } from 'next/app'
+import NextProgress from 'next-progress'
 import '@/styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -15,6 +16,12 @@ export default function App({ Component, pageProps }: AppProps) {
       supabaseClient={supabaseClient}
       initialSession={pageProps.initialSession}
     >
+      <NextProgress
+        delay={300}
+        color='#ededed'
+        height={1.5}
+        options={{ showSpinner: false }}
+      />
       <ToastProvider>
         <Layout>
           <Component {...pageProps} />

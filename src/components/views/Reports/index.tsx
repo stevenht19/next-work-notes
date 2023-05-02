@@ -16,7 +16,6 @@ dayjs.extend(isoWeek)
 export default function Reports() {
 
   const { startOfWeek } = getDates()
-  
   const { reports, report, editReport, onSelect, onClear } = useReports()
 
   const onSubmit = async (activities: Report['activities']) => {

@@ -5,7 +5,7 @@ export const IconButton = ({ icon, open, active, onClick }: Props) => {
 
   const activeClassName = active ?
     'border-blue-700' : 
-    'border-zinc-800' 
+    'border-zinc-800 hover:border-zinc-300' 
 
   return (
     <button

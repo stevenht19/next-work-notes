@@ -7,13 +7,13 @@ export type Props = {
   startOfWeek: Dayjs
 }
 
-export const DaysOfWeek = ({ reports, startOfWeek }: Props) => {
-
+export const DaysOfWeek: React.FC<Props> = ({ reports, startOfWeek }) => {
+  
   const days = reports
     .map(({ created_at }) => {
       return dayjs(created_at).day()
     })
-
+  
   return (
     <div className='pb-8'>
       <div className='flex gap-6'>
@@ -21,7 +21,8 @@ export const DaysOfWeek = ({ reports, startOfWeek }: Props) => {
           new Array(5)
             .fill('')
             .map((_, i) => {
-              return startOfWeek.add(i, 'day')
+              return startOfWeek
+                .add(i, 'day')
             })
             .map((day, i) => (
               <Day
