@@ -1,11 +1,15 @@
 import { useState } from 'react'
+import { Inter } from 'next/font/google'
 import { SessionContextProvider } from '@supabase/auth-helpers-react'
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { ToastProvider } from '@/context/Toast'
-import { Layout } from '@/components/layout'
 import type { AppProps } from 'next/app'
 import NextProgress from 'next-progress'
 import '@/styles/globals.css'
+
+const inter = Inter({
+  subsets: ['latin']
+})
 
 export default function App({ Component, pageProps }: AppProps) {
 
@@ -23,9 +27,9 @@ export default function App({ Component, pageProps }: AppProps) {
         options={{ showSpinner: false }}
       />
       <ToastProvider>
-        <Layout>
+        <div className={inter.className}>
           <Component {...pageProps} />
-        </Layout>
+        </div>
       </ToastProvider>
     </SessionContextProvider>
   )

@@ -4,6 +4,8 @@ import { Note } from '@/models/Note'
 import { NoteForm } from '@/components/forms/notes'
 import { noteService } from '@/services/notes/notes.service'
 import { NoteValues } from '@/components/forms/notes/types'
+import { Main } from '@/components/layout/Main'
+import { Header } from '@/components/layout/Header'
 
 type Props = {
   notes: Note[]
@@ -22,10 +24,13 @@ export default function Note({ notes }: Props) {
       <Head>
         <title>Note | {note.title}</title>
       </Head>
-      <NoteForm
-        initialValues={note}
-        onSubmit={onSubmit}
-      />
+      <Header />
+      <Main>
+        <NoteForm
+          initialValues={note}
+          onSubmit={onSubmit}
+        />
+      </Main>
     </>
   )
 }

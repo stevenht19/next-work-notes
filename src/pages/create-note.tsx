@@ -1,11 +1,14 @@
 import Head from 'next/head'
 import { NoteForm } from '@/components/forms/notes'
-import { NoteValues }  from '@/components/forms/notes/types'
+import { NoteValues } from '@/components/forms/notes/types'
 import { noteService } from '@/services/notes/notes.service'
 import { useUser } from '@supabase/auth-helpers-react'
+import { Main } from '@/components/layout/Main'
+import { Header } from '@/components/layout/Header'
+import { useToast } from '@/hooks/useToast'
 
 export default function Notes() {
-  
+
   const user = useUser()
 
   const onCreate = async (note: NoteValues) => {
@@ -20,7 +23,10 @@ export default function Notes() {
           Create Note
         </title>
       </Head>
-      <NoteForm onSubmit={onCreate} />
+      <Header />
+      <Main>
+        <NoteForm onSubmit={onCreate} />
+      </Main>
     </>
   )
 }

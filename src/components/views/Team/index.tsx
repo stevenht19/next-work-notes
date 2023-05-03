@@ -1,9 +1,9 @@
-import { AiOutlineUser } from 'react-icons/ai'
 import { Grid } from '@/components/atoms/Grid'
 import { Card } from '@/components/atoms/Card'
+import { DailyReport } from '@/components/modals/DailyReport'
 import { useProfiles } from './hooks/useProfiles'
-import DiaryReport from '@/components/modals/DiaryReport'
 import { UserReport } from './UserReport'
+import { Avatar } from './Avatar'
 
 export const Workgroup = () => {
   const [profiles, profile, onSelect, onClear] = useProfiles()
@@ -12,12 +12,12 @@ export const Workgroup = () => {
     <>
       {
         Boolean(profile) && (
-          <DiaryReport
-            title={`${profile?.username}'s`}
+          <DailyReport
             onClose={onClear}
+            title={`${profile!.username}'s`}
           >
             <UserReport userId={profile!.id} />
-          </DiaryReport>
+          </DailyReport>
         )
       }
       <Grid
@@ -27,13 +27,7 @@ export const Workgroup = () => {
             id={props.id}
             title={`${props.username}`}
             onClick={() => onSelect(props)}
-            created_at={new Date().toString()}
-            avatar={
-              <div className='bg-white uppercase text-zinc-950 w-8 h-8 font-medium mb-2 rounded-full grid place-content-center'>
-                Hacer commit fix get reports
-                {props.username?.at(0)}
-              </div>
-            }
+            avatar={<Avatar username={props.username!} />}
           />
         )}
       />

@@ -6,7 +6,7 @@ type Props = ButtonProps & {
   path?: string
 }
 
-const className = 'max-w-[12rem] w-full text-neutral-500 bg-zinc-900/90 rounded-md transition-colors hover:bg-zinc-800 hover:text-zinc-400'
+const className = 'max-w-[12rem] w-full text-neutral-500 bg-zinc-900/80 rounded-md transition-colors hover:bg-zinc-800 hover:text-zinc-400'
 
 export const Button = ({ path, children, onClick }: Props) => {
 

@@ -2,9 +2,9 @@ import { RiInformationLine } from 'react-icons/ri'
 import { Report } from '@/models/Report'
 import { Grid } from '@/components/atoms/Grid'
 import { Card } from '@/components/atoms/Card'
-import { DiaryReport } from '@/components/modals/DiaryReport'
+import { DailyReport } from '@/components/modals/DailyReport'
 import { getDates } from '@/utils/getWeekDates'
-import { DiaryReportForm } from '@/components/forms/reports/Diary'
+import { DailyReportForm } from '@/components/forms/reports'
 import { reportService } from '@/services/reports/report.service'
 import { useReports } from './hooks/useReports'
 import { DaysOfWeek } from './DaysOfWeek'
@@ -30,12 +30,12 @@ export default function Reports() {
     <>
       {
         report && (
-          <DiaryReport onClose={onClear}>
-            <DiaryReportForm
+          <DailyReport onClose={onClear}>
+            <DailyReportForm
               report={report}
               action={onSubmit}
             />
-          </DiaryReport>
+          </DailyReport>
         )
       }
       <DaysOfWeek

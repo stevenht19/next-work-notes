@@ -34,7 +34,7 @@ const Menu = ({ open, children, onClose }: Props) => {
       {
         open && (
           <div
-            className='shadow-lg opacity-0 animate-[fadeIn_.22s_forwards] top-full m-2 rounded-md bg-neutral-950 border border-neutral-700 right-0 absolute w-48'
+            className='shadow-lg opacity-0 animate-[fadeIn_.22s_forwards] top-full m-2 rounded-md bg-zinc-950/90 border border-neutral-800 right-0 absolute w-48'
           >
             {children}
           </div>

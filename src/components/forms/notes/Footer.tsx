@@ -6,8 +6,9 @@ import { Editor } from '@tiptap/react'
 import { Report } from '@/models/Report'
 import { Button } from '@/components/atoms/Button'
 import { reportService } from '@/services/reports/report.service'
-import { DiaryReport } from '@/components/modals/DiaryReport'
-import { DiaryReportForm } from '@/components/forms/reports/Diary'
+import { DailyReport } from '@/components/modals/DailyReport'
+import { DailyReportForm } from '@/components/forms/reports'
+import { useToast } from '@/hooks/useToast'
 
 type Props = {
   loading: boolean
@@ -16,8 +17,7 @@ type Props = {
 }
 
 export const Footer = ({ loading, editor, onSave }: Props) => {
-
-  const router = useRouter()
+  const { onOpen: setToast } = useToast()
   const [activities, setActivities] = useState<Report['activities']>([])
 
   const onOpen = () => {
@@ -29,15 +29,36 @@ export const Footer = ({ loading, editor, onSave }: Props) => {
   }
 
   const createReport = async (activities: Report['activities']) => {
-    await reportService.createReport({ activities })
-    router.push('/')
+
+    try {
+      await reportService
+      .createReport({ activities })
+
+      setToast({
+        type: 'success',
+        message: 'Daily report created successfully'
+      })
+    
+    } catch(err) {
+      if (err instanceof Error)
+
+      setToast({
+        type: 'success',
+        message: err.message
+      })
+
+      setActivities([])
+    }
+  
   }
 
   return (
     <footer className='flex pb-7 gap-6'>
       <Button
         onClick={onOpen}
-        icon={<HiOutlineInformationCircle size={22} />}
+        icon={
+          <HiOutlineInformationCircle size={22} />
+        }
       >
         Generate Report
       </Button>
@@ -50,15 +71,15 @@ export const Footer = ({ loading, editor, onSave }: Props) => {
       </Button>
       {
         Boolean(activities.length) && (
-          <DiaryReport
+          <DailyReport
             onClose={onClose}
           >
-            <DiaryReportForm
+            <DailyReportForm
               report={{ activities }}
               action={createReport}
               text='Create Report'
             />
-          </DiaryReport>
+          </DailyReport>
         )
       }
     </footer>

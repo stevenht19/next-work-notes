@@ -80,7 +80,7 @@ export const Card = ({
 const CardTitle = ({ children }: {
   children: React.ReactNode
 }) => (
-  <h2 className='font-bold text-start text-sm mb-1.5 text-neutral-300'>
+  <h2 className='font-bold text-start text-sm text-neutral-300'>
     {children}
   </h2>
 )
@@ -88,7 +88,7 @@ const CardTitle = ({ children }: {
 const CardDate = ({ children }: {
   children: React.ReactNode
 }) => (
-  <span className='text-zinc-600 text-xs flex justify-end'>
+  <span className='text-zinc-600 text-xs flex justify-end mt-1.5'>
     {children}
   </span>
 )

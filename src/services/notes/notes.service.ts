@@ -6,27 +6,16 @@ const supabase = createBrowserSupabaseClient()
 class NoteService {
 
   async findNoteByUser(userId?: string) {
-    try {
+    const { data, error } = await supabase
+      .from('notes')
+      .select('id, title, created_at')
+      .eq('user_id', userId)
 
-      if (!userId) {
-        throw new Error('Non Authenticated')
-      }
-
-      const { data, error } = await supabase
-        .from('notes')
-        .select('id, title, created_at')
-        .eq('user_id', userId)
-
-      if (error) {
-        throw new Error(error.message)
-      }
-
-      return data
-
-    } catch (err) {
-      if (err instanceof Error)
-        throw new Error(err.message)
+    if (error) {
+      throw new Error(error.message)
     }
+
+    return data
   }
 
   async findNoteById(id: Note['id']) {

@@ -27,15 +27,15 @@ export default function AuthForm({ initialState, title, action }: Props) {
   }
 
   return (
-    <div className='max-w-lg mx-auto pt-16'>
+    <div className='max-w-lg mx-auto pt-24 px-4 pb-2'>
       <Typography.h2>
         {title}
       </Typography.h2>
-      <Typography color='text-zinc-300'>
+      <Typography color='text-zinc-200'>
         {signUpCredentials ? `Let's get started for free!` : 'Welcome again!'}
       </Typography>
       <form
-        className='flex flex-col gap-7 border border-neutral-800 mt-6 p-8 rounded-md'
+        className='flex flex-col gap-7 border border-zinc-800 mt-6 p-8 rounded-md'
         onSubmit={handleSubmit(onSubmit)}
       >
         {
@@ -69,21 +69,21 @@ export default function AuthForm({ initialState, title, action }: Props) {
           type='submit'
           loading={isSubmitting}
         >
-          Sign up
+          {title}
         </Button>
         {
           signUpCredentials ? (
-            <Typography color='text-zinc-300'>
-              {`Do you already have an account? `}
+            <Typography color='text-zinc-200'>
+              {`Already have an account? `}
               <Link
                 href='/login'
                 className='text-blue-600 underline'
               >
-                Log in
+                Sign in
               </Link>
             </Typography>
           ) : (
-            <Typography color='text-zinc-300'>
+            <Typography color='text-zinc-200'>
               {`Don't you have an account? `}
               <Link
                 href='/signup'

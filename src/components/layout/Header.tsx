@@ -12,7 +12,7 @@ export const Header = () => {
 
   return (
     <header
-      className='fixed top-0 flex items-center justify-between px-5 border-b border-b-zinc-800 bg-zinc-950 -800 h-16 w-full z-20'
+      className='fixed bg-black top-0 flex items-center justify-between px-5 border-b border-b-zinc-900 h-16 w-full z-20'
     >
       <Link href='/'>
         <GiSlumberingSanctuary

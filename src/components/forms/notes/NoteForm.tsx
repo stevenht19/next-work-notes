@@ -15,7 +15,6 @@ import { Props } from './types'
 export default function NoteForm({ initialValues, onSubmit }: Props) {
 
   const router = useRouter()
-
   const ref = useRef<HTMLInputElement>(null)
 
   const editor = useEditor({
