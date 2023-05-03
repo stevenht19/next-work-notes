@@ -1,18 +1,40 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import { Button } from '@/components/atoms/AddButton'
+import Head from 'next/head'
+import { GetServerSidePropsContext } from 'next'
+import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs'
+import { ReportProvider } from '@/context/Report'
+import { HomeTabs } from '@/components/tabs/HomeTabs'
+import { Actions } from '@/components/layout/Actions'
+import { Note } from '@/models/Note'
+import { noteService } from '@/services/notes/notes.service'
+import { Header } from '@/components/layout/Header'
 
-//const inter = Inter({ subsets: ['latin'] })
+export type HomeProps = {
+  notes: Note[]
+}
 
-export default function Home() {
+export default function Home({ notes }: HomeProps) {
   return (
-    <div className='max-w-6xl mx-auto p-3'>
-      <h2 className='text-4xl text-white font-bold mb-8'>
-        Welcome
-      </h2>
-      <Button>
-        Add Notes
-      </Button>
-    </div>
+    <>
+      <Head>
+        <title>Home</title>
+      </Head>
+      <ReportProvider>
+        <Actions />
+        <HomeTabs notes={notes} />
+      </ReportProvider>
+    </>
   )
+}
+
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  const supabase = createServerSupabaseClient(ctx)
+  const { data: { user } } = await supabase.auth.getUser()
+
+  const notes = await noteService.findNoteByUser(user?.id)
+
+  return {
+    props: {
+      notes
+    }
+  }
 }
