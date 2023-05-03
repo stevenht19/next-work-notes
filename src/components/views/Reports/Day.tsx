@@ -1,12 +1,12 @@
-import { DiaryReportForm } from '@/components/forms/reports/Diary'
-import { DiaryReport } from '@/components/modals/DiaryReport'
+import { useUser } from '@supabase/auth-helpers-react'
 import { useBoolean } from '@/hooks'
 import { useReports } from '@/hooks/useReports'
 import { useToast } from '@/hooks/useToast'
 import { Report } from '@/models/Report'
+import { DailyReportForm } from '@/components/forms/reports'
+import { DailyReport } from '@/components/modals/DailyReport'
 import { reportService } from '@/services/reports/report.service'
 import { toISOString } from '@/utils/getWeekDates'
-import { useUser } from '@supabase/auth-helpers-react'
 import dayjs, { Dayjs } from 'dayjs'
 
 type Props = {
@@ -21,10 +21,10 @@ export const Day = ({ day, days }: Props) => {
   const isNotReported = dayjs(day).isBefore(new Date()) && !days.includes(day.day())
   const isDayCompleted = days.includes(day.day()) ? 'text-green-300' : 'text-white'
 
+  const [open, setOpen] = useBoolean()
+
   const { addReport } = useReports()
   const { onOpen } = useToast()
-
-  const [open, setOpen] = useBoolean()
 
   const onClick = () => {
     if (!isNotReported) return
@@ -66,9 +66,9 @@ export const Day = ({ day, days }: Props) => {
       </button>
       {
         open && (
-          <DiaryReport size='max-w-lg' onClose={setOpen.off}>
-            <DiaryReportForm action={createReport} />
-          </DiaryReport>
+          <DailyReport size='max-w-lg' onClose={setOpen.off}>
+            <DailyReportForm action={createReport} />
+          </DailyReport>
         )
       }
     </>

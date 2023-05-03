@@ -1,23 +1,18 @@
 import { useRef } from 'react'
-import { BsClipboardFill } from 'react-icons/bs'
 import { useScroll } from '@/hooks/useScroll'
 import { useBoolean } from '@/hooks'
-import { RxClipboard } from 'react-icons/rx'
 import { useModal } from '@/components/atoms/Modal/Modal'
 import { useForm, SubmitHandler, } from '@/hooks/useForm'
 import { Report } from '@/models/Report'
 import { Button } from '@/components/atoms/Button'
-import { IconButton } from '@/components/buttons/IconButton'
 import { RefInput } from '@/components/atoms/RefInput'
+import { useActivities } from './hooks/useActivities'
 import { ActivityItem } from './Activity'
 import { Activity } from './types'
-import { useActivities } from './hooks/useActivities'
 
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import localeData from 'dayjs/plugin/localeData'
-import { CopyToClipboardButton } from '@/components/buttons/CopyToClipboardButton'
-import { Typography } from '@/components/atoms/Typography'
 import { Tips } from './Tips'
 
 dayjs.locale('en')
@@ -30,7 +25,7 @@ type Props = {
   action: (report: Report['activities']) => Promise<void>
 }
 
-export const DiaryReportForm = ({ report, text, action }: Props) => {
+export const DailyReportForm = ({ report, text, action }: Props) => {
 
   const {
     formValues,

@@ -34,11 +34,14 @@ class ReportService {
         throw new Error('Today is not a workday')
       }
 
+      const auth = await supabase.auth.getUser()
+
       if (!report?.created_at) {
         const reportToFind = await supabase.from('reports')
           .select()
           .gt('created_at', dayjs().hour(0).minute(0).second(0))
           .lt('created_at', dayjs().add(1, 'day'))
+          .eq('user_id', auth.data.user?.id)
 
         if (reportToFind.data?.length) {
           throw new Error('You have already made a report today.')
@@ -47,7 +50,7 @@ class ReportService {
 
       const { data, error } = await supabase
         .from('reports')
-        .insert(report)
+        .insert({...report, user_id: auth.data.user?.id })
         .select()
 
       if (error) {

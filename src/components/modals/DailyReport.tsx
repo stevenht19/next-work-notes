@@ -1,8 +1,8 @@
 import { Modal, ModalHeader, ModalContent } from '@/components/atoms/Modal'
+import { Typography } from '@/components/atoms/Typography'
 import { Props } from './utils'
-import { Typography } from '../atoms/Typography'
 
-export const DiaryReport = ({ 
+export const DailyReport = ({ 
   title, 
   size, 
   children, 
@@ -12,7 +12,7 @@ export const DiaryReport = ({
     <Modal onClose={onClose!}>
       <ModalContent size={size ?? 'max-w-xl'}>
         <ModalHeader onClose={onClose}>
-          <h2 className='font-medium capitalize'>
+          <h2 className='font-medium'>
             {title} Report
           </h2>
           <Typography>
@@ -23,5 +23,3 @@ export const DiaryReport = ({
     </Modal>
   )
 }
-
-export default DiaryReport

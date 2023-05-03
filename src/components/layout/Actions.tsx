@@ -1,33 +1,34 @@
+import dynamic from 'next/dynamic'
+import { useUser } from '@supabase/auth-helpers-react'
 import { useBoolean } from '@/hooks'
 import { Report } from '@/models/Report'
 import { Badge } from '@/components/atoms/Badge'
 import { Button } from '@/components/buttons/AddButton'
 import { Typography } from '@/components/atoms/Typography'
-import { DiaryReportForm } from '@/components/forms/reports/Diary'
+import { DailyReportForm } from '@/components/forms/reports'
 import { reportService } from '@/services/reports/report.service'
 import { useToast } from '@/hooks/useToast'
 import { useReports } from '@/hooks/useReports'
-import dynamic from 'next/dynamic'
-import { useUser } from '@supabase/auth-helpers-react'
-import { useRouter } from 'next/router'
 
-const DailyReportModal = dynamic(() => import('@/components/modals/DiaryReport'), {
+const DailyReportModal = dynamic(() => 
+  import('@/components/modals/DailyReport').then(mod => mod.DailyReport), {
   loading: () => null
 })
 
 export const Actions = () => {
-  const router = useRouter()
+  
+  const user = useUser()
   const [open, setOpen] = useBoolean()
-
   const { addReport } = useReports()
   const { onOpen } = useToast()
-
-  const user = useUser()
 
   const onSubmit = async (activities: Report['activities']) => {
     try {
       const report = await reportService
-        .createReport({ activities, user_id: user?.id })
+        .createReport({ 
+          activities, 
+          user_id: user?.id
+        })
 
       addReport(report!)
 
@@ -61,8 +62,11 @@ export const Actions = () => {
       </div>
       {
         open && (
-          <DailyReportModal onClose={setOpen.off} size='max-w-lg'>
-            <DiaryReportForm action={onSubmit} />
+          <DailyReportModal
+            onClose={setOpen.off}
+            size='max-w-lg'
+          >
+            <DailyReportForm action={onSubmit} />
           </DailyReportModal>
         )
       }
