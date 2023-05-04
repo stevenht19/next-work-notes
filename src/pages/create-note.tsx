@@ -5,7 +5,6 @@ import { noteService } from '@/services/notes/notes.service'
 import { useUser } from '@supabase/auth-helpers-react'
 import { Main } from '@/components/layout/Main'
 import { Header } from '@/components/layout/Header'
-import { useToast } from '@/hooks/useToast'
 
 export default function Notes() {
 

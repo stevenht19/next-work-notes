@@ -4,17 +4,18 @@ import { Button } from '@/components/atoms/Button'
 import { Box } from '@/components/atoms/Box'
 import { useReports } from '@/hooks/useReports'
 import { HomeProps } from '@/pages'
-import { useEffect } from 'react'
-import { reportService } from '@/services/reports/report.service'
+/*import { useEffect } from 'react'
+import { reportService } from '@/services/reports/report.service'*/
 
 export const Weekend = ({ notes }: HomeProps) => {
 
-  const { reports, setReports } = useReports()
+  const { reports } = useReports()
 
   const activitiesCount = reports.reduce((acc, value) => {
     return acc + value.activities.length
   }, 0)
 
+  /*
   useEffect(() => {
     const getReports = async () => {
       if (reports.length) return
@@ -25,7 +26,7 @@ export const Weekend = ({ notes }: HomeProps) => {
 
     getReports()
 
-  }, [])
+  }, [])*/
 
   const generateReport = async () => {
     //
