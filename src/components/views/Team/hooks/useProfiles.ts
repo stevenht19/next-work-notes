@@ -2,8 +2,7 @@ import { Profile } from '@/models/Profile'
 import { profileService } from '@/services/profiles/profile.service'
 import { useEffect, useState } from 'react'
 
-type ProfileWithPartialData = Pick<Profile, 'id' | 'username'>
-
+export type ProfileWithPartialData = Pick<Profile, 'id' | 'username'>
 
 export const useProfiles = () => {
 

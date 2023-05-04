@@ -1,43 +1,59 @@
-import { Profile } from '@/models/Profile'
-import { useUserReports } from './hooks/useReport'
 import dayjs from 'dayjs'
+import { useUserReports } from './hooks/useReport'
 import { Typography } from '@/components/atoms/Typography'
+import { CopyToClipboard } from '@/components/buttons/CopyToClipboard'
+import { ProfileWithPartialData } from './hooks/useProfiles'
+import { WeeklyReport } from './Report'
 
 type Props = {
-  userId: Profile['id']
+  user: ProfileWithPartialData
 }
 
-export const UserReport = ({ userId }: Props) => {
-
-  const [reports, loading] = useUserReports(userId)
+export const UserReport = ({ user }: Props) => {
+  const [reports, loading] = useUserReports(user.id)
 
   if (loading) {
-    <div className='p-6'>
-      Loading...
-    </div>
+    return (
+      <p className='p-6'>
+        Loading...
+      </p>
+    )
+  }
+
+  const copyToClipboard = async (text: string) => {
+    await navigator.clipboard.writeText(text)
+  }
+
+  const onCopy = () => {
+    const reportToCopy = reports.map((report) => {
+      return `${user.username} Report\n\n${dayjs(report.created_at).format('dddd')} ${dayjs(report.created_at).format('DD/MM/YYYY')}\n${report.activities.map((act) => `\n- ${act}`).join('')}`
+    }).join('\n')
+
+    copyToClipboard(reportToCopy)
   }
 
   return (
     <div className='p-6'>
-      <div className='overflow-y-auto max-h-80'>
+      <div className='overflow-y-auto max-h-96'>
+        <div className='flex justify-end mr-2'>
+          {
+            Boolean(reports.length) && (
+              <CopyToClipboard onClick={onCopy} />
+            )
+          }
+        </div>
         {
           reports.length ?
-          reports?.map((report, i) => (
-            <div key={i}>
-              <h2 className='font-semibold my-2 text-sm'>{dayjs(report.created_at).format('dddd')} {dayjs(report.created_at).format('DD/MM/YYYY')}</h2>
-              <ul className='pl-2 list-disc text-zinc-200 text-sm leading-7'>
-                {report.activities.map((act) => (
-                  <li key={i}>
-                    - {act}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )) : (
-            <Typography>
-              {`User haven't made reports during the week.`}
-            </Typography>
-          )
+            reports?.map((report) => (
+              <WeeklyReport
+                key={report.id}
+                {...report}
+              />
+            )) : (
+              <Typography>
+                {`User haven't made reports during the week.`}
+              </Typography>
+            )
         }
       </div>
     </div>
