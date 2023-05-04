@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 
 export const useUserReports = (userId: Profile['id']) => {
   const [reports, setReports] = useState<Report[]>([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
     const getReports = async () => {

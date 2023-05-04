@@ -7,9 +7,9 @@ import { noteService } from '@/services/notes/notes.service'
 import { AlertDialog } from '@/components/modals/AlertDialog'
 import { Toolbar } from '@/components/editor/Toolbar'
 import { config } from '@/components/editor/config'
+import { Settings } from './Settings'
 import { Input } from './Input'
 import { Footer } from './Footer'
-import { Settings } from './Settings'
 import { Props } from './types'
 
 export default function NoteForm({ initialValues, onSubmit }: Props) {
@@ -28,7 +28,8 @@ export default function NoteForm({ initialValues, onSubmit }: Props) {
 
   const onDelete = async () => {
     setDeleting.on()
-    await noteService.deleteNote(initialValues!.id!)
+    await noteService
+      .deleteNote(initialValues!.id!)
     router.push('/')
   }
 

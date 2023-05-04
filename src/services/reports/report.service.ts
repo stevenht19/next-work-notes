@@ -22,7 +22,6 @@ class ReportService {
       .eq('user_id', auth.data.user?.id)
       .order('created_at', { ascending: true })
 
-    console.log(toISOString(startOfWeek),toISOString(endOfWeek),  auth)
     return data ?? []
   }
 
