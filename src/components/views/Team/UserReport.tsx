@@ -1,7 +1,7 @@
 import { Profile } from '@/models/Profile'
+import { Typography } from '@/components/atoms/Typography'
 import { useUserReports } from './hooks/useReport'
 import dayjs from 'dayjs'
-import { Typography } from '@/components/atoms/Typography'
 
 type Props = {
   userId: Profile['id']
