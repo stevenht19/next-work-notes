@@ -28,7 +28,7 @@ export const Avatar = () => {
         type='button'
         data-active={open}
         onClick={setOpen.toggle}
-        className='select-none cursor-pointer bg-yellow-500 font-medium grid place-items-center w-9 h-9 rounded-full animate-fadeIn'
+        className='shadow-lg shadow-yellow-300/20 select-none cursor-pointer bg-yellow-500 font-medium grid place-items-center w-9 h-9 rounded-full animate-fadeIn'
       >
         {user?.email?.charAt(0).toUpperCase()}
       </button>

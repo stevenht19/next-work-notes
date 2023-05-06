@@ -3,11 +3,12 @@ import { useBoolean } from '@/hooks'
 import { IconButton } from './IconButton'
 import { Props } from './types'
 
-export const CopyToClipboardButton = ({ onClick }: Props) => {
+export const message = 'Buenas tardes.\n Mis actividades de hoy fueron:\n'
 
+export const CopyToClipboard= ({ onClick }: Props) => {
   const [copy, setCopy] = useBoolean()
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (copy) return
 
     setCopy.on()
@@ -20,7 +21,7 @@ export const CopyToClipboardButton = ({ onClick }: Props) => {
   }
 
   return (
-    <div className='relative'>
+    <div className='relative mb-auto'>
       <IconButton
         onClick={handleClick}
         icon={copy ? (
