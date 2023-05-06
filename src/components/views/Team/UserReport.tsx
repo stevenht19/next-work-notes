@@ -26,10 +26,10 @@ export const UserReport = ({ user }: Props) => {
 
   const onCopy = () => {
     const reportToCopy = reports.map((report) => {
-      return `${user.username} Report\n\n${dayjs(report.created_at).format('dddd')} ${dayjs(report.created_at).format('DD/MM/YYYY')}\n${report.activities.map((act) => `\n- ${act}`).join('')}`
+      return `\n${dayjs(report.created_at).format('dddd')} ${dayjs(report.created_at).format('DD/MM/YYYY')}\n${report.activities.map((act) => `\n- ${act}`).join('')}`
     }).join('\n')
 
-    copyToClipboard(reportToCopy)
+    copyToClipboard(`${user.username} Report\n${reportToCopy}`)
   }
 
   return (
