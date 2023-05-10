@@ -8,10 +8,10 @@ import { Profile } from '@/models/Profile'
 const supabase = createBrowserSupabaseClient<Database>()
 
 class ReportService {
+
   async getReports() {
 
     const { startOfWeek, endOfWeek } = getDates()
-
     const auth = await supabase.auth.getUser()
     
     const { data } = await supabase

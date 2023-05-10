@@ -28,6 +28,7 @@ export const HomeTabs = ({ notes }: HomeProps) => {
         <Tab label='Notes' />
         <Tab label='Reports' />
         <Tab label='Team' />
+        <Tab label='Weekend' />
       </Tabs>
       <TabPanel index={0} value={value}>
         {
@@ -42,13 +43,9 @@ export const HomeTabs = ({ notes }: HomeProps) => {
       <TabPanel index={2} value={value}>
         <Workgroup />
       </TabPanel>
-      {
-        /*
-        <TabPanel index={3} value={value}>
-          <Weekend notes={notes} />
-        </TabPanel> 
-        */
-      }
+      <TabPanel index={3} value={value}>
+        <Weekend notes={notes} />
+      </TabPanel>
     </>
   )
 }

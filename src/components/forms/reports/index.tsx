@@ -120,7 +120,7 @@ export const DailyReportForm = ({ report, text, action }: Props) => {
           onFocus={onFocus}
           onBlur={onBlur}
           name='name'
-          placeholder='Type an activity'
+          placeholder='Type an activity and press enter'
         />
       </form>
       <Button

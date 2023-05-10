@@ -5,7 +5,7 @@ class Profile {
   private supabase = createBrowserSupabaseClient<Database>()
 
   async findProfiles() {
-    return (await this.supabase.from('profiles').select('id, username')).data ?? []
+    return (await this.supabase.from('profiles').select('id, username, job')).data ?? []
   }
 
 }
