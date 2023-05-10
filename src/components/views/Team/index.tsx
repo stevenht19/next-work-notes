@@ -27,6 +27,7 @@ export const Workgroup = () => {
             key={props.id}
             id={props.id}
             title={`${props.username}`}
+            subheader={`${props.job}`}
             onClick={() => onSelect(props)}
             avatar={<Avatar username={props.username!} />}
           />

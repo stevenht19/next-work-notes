@@ -7,6 +7,7 @@ dayjs.extend(calendar)
 type Props = {
   id: number | string
   title: string
+  subheader?: string
   created_at?: string
   path?: string
   icon?: React.ReactNode
@@ -20,6 +21,7 @@ export const Card = ({
   icon,
   title,
   avatar,
+  subheader,
   created_at,
   onClick
 }: Props) => {
@@ -35,11 +37,20 @@ export const Card = ({
       >
         {
           avatar ? (
-            <div className='flex items-center gap-3'>
+            <div className='flex'>
               {avatar}
-              <CardTitle>
-                {title}
-              </CardTitle>
+              <div className='pl-3'>
+                <CardTitle>
+                  {title}
+                </CardTitle>
+                {
+                  subheader && (
+                    <CardSubheader>
+                      {subheader}
+                    </CardSubheader>
+                  )
+                }
+              </div>
             </div>
           ) : (
             <>
@@ -89,6 +100,14 @@ const CardDate = ({ children }: {
   children: React.ReactNode
 }) => (
   <span className='text-zinc-600 text-xs flex justify-end mt-1.5'>
+    {children}
+  </span>
+)
+
+const CardSubheader = ({ children }: {
+  children: React.ReactNode
+}) => (
+  <span className='text-xs text-zinc-400 mt-1'>
     {children}
   </span>
 )

@@ -1,4 +1,4 @@
-import { createContext, useReducer } from 'react'
+import { createContext, useCallback, useReducer } from 'react'
 import { Report } from '@/models/Report'
 import { reportsReducer } from '@/reducers/reportsReducer'
 
@@ -29,14 +29,12 @@ export function ReportProvider({ children }: {
 
   const [reportsState, dispatch] = useReducer(reportsReducer, initialState)
 
-  function setReports(reports: Report[]) {
+  const setReports = useCallback((reports: Report[]) => {
     dispatch({
       type: 'set_reports',
       payload: reports
     })
-    
-    return () => reportsState.reports 
-  }
+  }, [])
 
   function addReport(report: Report) {
     dispatch({
