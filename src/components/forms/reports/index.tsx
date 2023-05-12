@@ -4,18 +4,17 @@ import { useBoolean } from '@/hooks'
 import { Report } from '@/models/Report'
 import { useModal } from '@/components/atoms/Modal/Modal'
 import { useForm, SubmitHandler, } from '@/hooks/useForm'
-import { CopyToClipboard, message } from '@/components/buttons/CopyToClipboard'
+import { useReports } from '@/hooks/useReports'
 import { Button } from '@/components/atoms/Button'
 import { RefInput } from '@/components/atoms/RefInput'
+import { CopyToClipboard, message } from '@/components/buttons/CopyToClipboard'
 import { useActivities } from './hooks/useActivities'
 import { ActivityItem } from './Activity'
 import { Tips } from './Tips'
 import { Activity } from './types'
-
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import localeData from 'dayjs/plugin/localeData'
-import { useReports } from '@/hooks/useReports'
 
 dayjs.locale('en')
 dayjs.extend(relativeTime)
@@ -24,12 +23,19 @@ dayjs.extend(localeData)
 type Props = {
   report?: Partial<Report> | null
   text?: string
+  customDate?: string
   action: (report: Report['activities']) => Promise<void>
 }
 
-export const DailyReportForm = ({ report, text, action }: Props) => {
+export const DailyReportForm = ({ 
+  customDate,
+  report, 
+  text,
+  action 
+}: Props) => {
 
   const { editUserActivity } = useReports()
+  const { onFocus, onBlur } = useModal()
 
   const {
     formValues,
@@ -41,8 +47,6 @@ export const DailyReportForm = ({ report, text, action }: Props) => {
     id: Date.now(),
     name: ''
   })
-
-  const { onFocus, onBlur } = useModal()
 
   const {
     activities,
@@ -86,7 +90,7 @@ export const DailyReportForm = ({ report, text, action }: Props) => {
     setSubmitting.on()
     const texts = activities.map(({ name }) => name)
     await action(texts)
-    editUserActivity(texts, report?.created_at)
+    editUserActivity(texts, customDate ?? report?.created_at)
     setSubmitting.off()
   }
   

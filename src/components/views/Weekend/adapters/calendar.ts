@@ -1,5 +1,6 @@
-import { ActivityCalendar, Level } from '@/context/types'
+import { ActivityCalendar } from '@/context/types'
 import { Report } from '@/models/Report'
+import { getActivityLevel } from '@/utils/getActivityLevel'
 import dayjs from 'dayjs'
 
 export const calendarAdapter = (date: string): ActivityCalendar => {
@@ -16,21 +17,4 @@ export const reactActivityCalendarAdapter = ({ activities, created_at }: Report)
     level: getActivityLevel(activities.length),
     date: dayjs(created_at).format('YYYY-MM-DD'),
   }
-}
-
-const getActivityLevel = (length: number): Level => {
-  if (length === 1) {
-    return 1
-  }
-  if (length <= 3 && length >= 2) {
-    return 2
-  }
-  if (length <= 5 && length > 3) {
-    return 3
-  }
-  if (length > 5) {
-    return 4
-  }
-
-  return 0
 }

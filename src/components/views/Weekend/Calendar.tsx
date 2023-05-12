@@ -1,13 +1,16 @@
 import React from 'react'
 import ActivityCalendar from 'react-activity-calendar'
 import dayjs from 'dayjs'
-import { Tooltip as ReactTooltip } from 'react-tooltip'
+import { Tooltip } from 'react-tooltip'
 import { useUserActivity } from './hooks/useUserActivity'
+import { colors, months } from './utils'
 import 'react-tooltip/dist/react-tooltip.css'
+import { useReports } from '@/hooks/useReports'
 
 export const Calendar = () => {
 
-  const [activity, loading] = useUserActivity()
+  const { activity } = useReports()
+  const [loading] = useUserActivity()
 
   if (loading) {
     return (
@@ -18,27 +21,17 @@ export const Calendar = () => {
   return (
     <section className='pb-6'>
       <ActivityCalendar
-        colorScheme={'dark'}
         data={activity}
+        colorScheme={'dark'}
+        theme={{
+          dark: colors
+        }}
         labels={{
           legend: {
             less: 'Less',
             more: 'More'
           },
-          months: [
-            'Jan',
-            'Feb',
-            'Mar',
-            'Apr',
-            'May',
-            'Jun',
-            'Jul',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec'
-          ],
+          months: months,
           totalCount: '{{count}} activities during the year',
           weekdays: ['Sun', 'Mon', 'Tue', 'Wed', "Thu", 'Fri', 'Sat']
         }}
@@ -49,7 +42,7 @@ export const Calendar = () => {
           })
         }
       />
-      <ReactTooltip id='react-tooltip' />
+      <Tooltip id='react-tooltip' />
     </section>
   )
 }

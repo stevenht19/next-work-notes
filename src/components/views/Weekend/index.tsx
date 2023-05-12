@@ -7,7 +7,7 @@ import { Button } from '@/components/atoms/Button'
 import { Calendar } from './Calendar'
 import { getActivitiesCount } from './utils'
 
-export const Weekend = ({ notes }: HomeProps) => {
+export default function Weekend({ notes }: HomeProps) {
   const [reports] = useReportsData()
   const count = getActivitiesCount(reports)
   const totalReports = reports.length

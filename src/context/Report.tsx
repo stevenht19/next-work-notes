@@ -3,36 +3,30 @@ import { createContext, useCallback, useReducer } from 'react'
 import { Report } from '@/models/Report'
 import { reportsReducer } from '@/reducers/reportsReducer'
 import { ReportType } from '@/reducers/utils'
-import { ActivityCalendar } from './types'
+import { ActivityCalendar, ProfileWithPartialData } from './types'
 
 export interface ReportState {
   reports: Report[]
+  team: ProfileWithPartialData[]
   activity: ActivityCalendar[]
   userActivityLoading: boolean
 }
 
 export interface ReportContext extends ReportState {
-  setReports(reports: any): any
+  setReports(reports: Report[]): void
   addReport(report: Report): void
   editReport(report: Report): void
+  setTeam(team: ProfileWithPartialData[]): void
   setActivities(activities: ActivityCalendar[]): void
   editUserActivity(activities?: Report['activities'], date?: Report['created_at']): void
 }
 
-export const ReportContext = createContext<ReportContext>({
-  reports: [],
-  userActivityLoading: true,
-  activity: [],
-  setReports() {},
-  addReport() {},
-  editReport() {},
-  setActivities() {},
-  editUserActivity() {}
-})
+export const ReportContext = createContext<ReportContext>({} as ReportContext)
 
 const initialState: ReportState = {
   reports: [],
   activity: [],
+  team: [],
   userActivityLoading: true
 }
 
@@ -53,6 +47,13 @@ export function ReportProvider({ children }: {
     dispatch({
       type: ReportType.SET_USER_ACTIVITY,
       payload: activities
+    })
+  }, [])
+
+  const setTeam = useCallback((team: ProfileWithPartialData[]) => {
+    dispatch({
+      type: ReportType.SET_TEAM,
+      payload: team
     })
   }, [])
 
@@ -78,7 +79,8 @@ export function ReportProvider({ children }: {
       type: ReportType.EDIT_USER_ACTIVITY,
       payload: {
         count: activities.length,
-        date: date ? dayjs(date).format('YYYY-MM-DD') : dayjs().format('YYYY-MM-DD')
+        date: date ? 
+          dayjs(date).format('YYYY-MM-DD') : dayjs().format('YYYY-MM-DD')
       }
     })
   }
@@ -91,6 +93,7 @@ export function ReportProvider({ children }: {
         addReport,
         editReport,
         setActivities,
+        setTeam,
         editUserActivity
       }}
     >

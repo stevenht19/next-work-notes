@@ -1,6 +1,7 @@
 import { Report } from '@/models/Report'
 import { ReportState } from '@/context/Report'
-import { ActivityCalendar } from '@/context/types'
+import { ActivityCalendar, ProfileWithPartialData } from '@/context/types'
+import { getActivityLevel } from '@/utils/getActivityLevel'
 import { ReportType } from './utils'
 
 type Action = {
@@ -15,6 +16,9 @@ type Action = {
 } | {
   type: ReportType.EDIT_USER_ACTIVITY,
   payload: Partial<ActivityCalendar>
+} | {
+  type: ReportType.SET_TEAM
+  payload: ProfileWithPartialData[]
 }
 
 export const reportsReducer = (state: ReportState, action: Action): ReportState => {
@@ -23,6 +27,11 @@ export const reportsReducer = (state: ReportState, action: Action): ReportState 
       return {
         ...state,
         reports: action.payload
+      }
+    case ReportType.SET_TEAM:
+      return {
+        ...state,
+        team: action.payload
       }
     case ReportType.ADD_REPORT:
       return {
@@ -45,7 +54,11 @@ export const reportsReducer = (state: ReportState, action: Action): ReportState 
       return {
         ...state,
         activity: state?.activity?.map((date) => {
-          return date?.date === action.payload.date ? {...date, count: action.payload.count! } : date
+          return date?.date === action.payload.date ? {
+            ...date,
+            count: action.payload.count!,
+            level: getActivityLevel(action.payload.count!)
+          } : date
         })
       }
     default:
