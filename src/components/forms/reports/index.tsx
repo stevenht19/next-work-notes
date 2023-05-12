@@ -15,6 +15,7 @@ import { Activity } from './types'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import localeData from 'dayjs/plugin/localeData'
+import { useReports } from '@/hooks/useReports'
 
 dayjs.locale('en')
 dayjs.extend(relativeTime)
@@ -27,6 +28,8 @@ type Props = {
 }
 
 export const DailyReportForm = ({ report, text, action }: Props) => {
+
+  const { editUserActivity } = useReports()
 
   const {
     formValues,
@@ -73,15 +76,17 @@ export const DailyReportForm = ({ report, text, action }: Props) => {
     inputRef.current?.focus()
   }
 
-  const onCopy = () => {
-    navigator
+  const onCopy = async () => {
+    await navigator
       .clipboard
       .writeText(`${message}-${activities.map(({ name }) => name).join('\n-')}`)
   }
  
   const onSave = async () => {
     setSubmitting.on()
-    await action(activities.map(({ name }) => name))
+    const texts = activities.map(({ name }) => name)
+    await action(texts)
+    editUserActivity(texts, report?.created_at)
     setSubmitting.off()
   }
   

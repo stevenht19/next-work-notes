@@ -99,7 +99,7 @@ const CardTitle = ({ children }: {
 const CardDate = ({ children }: {
   children: React.ReactNode
 }) => (
-  <span className='text-zinc-600 text-xs flex justify-end mt-1.5'>
+  <span className='text-zinc-500 text-xs flex justify-end mt-1.5'>
     {children}
   </span>
 )
@@ -107,7 +107,7 @@ const CardDate = ({ children }: {
 const CardSubheader = ({ children }: {
   children: React.ReactNode
 }) => (
-  <span className='text-xs text-zinc-400 mt-1'>
+  <span className='text-[.8rem] text-zinc-400 mt-1'>
     {children}
   </span>
 )
