@@ -19,7 +19,7 @@ export const Settings = ({ onClick }: Props) => {
         open={open}
         onClose={setOpen.off}
       >
-        <Menu.Item onClick={onClick}>
+        <Menu.Item onClick={onClick} w='w-44'>
           <AiFillDelete
             className='fill-white'
             size={19}
