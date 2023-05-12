@@ -1,3 +1,5 @@
+import dayjs  from 'dayjs'
+import isoWeek from 'dayjs/plugin/isoWeek'
 import { RiInformationLine } from 'react-icons/ri'
 import { Report } from '@/models/Report'
 import { Grid } from '@/components/atoms/Grid'
@@ -8,8 +10,6 @@ import { DailyReportForm } from '@/components/forms/reports'
 import { reportService } from '@/services/reports/report.service'
 import { useReports } from './hooks/useReports'
 import { DaysOfWeek } from './DaysOfWeek'
-import dayjs  from 'dayjs'
-import isoWeek from 'dayjs/plugin/isoWeek'
 
 dayjs.extend(isoWeek)
 

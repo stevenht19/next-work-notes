@@ -14,16 +14,18 @@ const getDayStatus = (day: number) => {
   }
 }
 
+type Props = {
+  color: string
+  children: React.ReactNode
+}
 
-export const Badge = () => {
-
-  const { color, status } = getDayStatus(dayjs().day())
+export const Badge = ({ color, children }: Props) => {
 
   return (
     <div
       className={`px-2 py-0.5 mt-2 font-medium inline-block text-xs rounded-sm ${color}`}
     >
-      {status}
+      {children}
     </div>
   )
 }

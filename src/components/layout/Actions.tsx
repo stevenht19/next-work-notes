@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+import dayjs from 'dayjs'
 import { useUser } from '@supabase/auth-helpers-react'
 import { useBoolean } from '@/hooks'
 import { Report } from '@/models/Report'
@@ -9,6 +10,7 @@ import { DailyReportForm } from '@/components/forms/reports'
 import { reportService } from '@/services/reports/report.service'
 import { useToast } from '@/hooks/useToast'
 import { useReports } from '@/hooks/useReports'
+import { getDayStatus } from '@/utils/getDayStatus'
 
 const DailyReportModal = dynamic(() => 
   import('@/components/modals/DailyReport').then(mod => mod.DailyReport), {
@@ -21,6 +23,7 @@ export const Actions = () => {
   const [open, setOpen] = useBoolean()
   const { addReport } = useReports()
   const { onOpen } = useToast()
+  const { color, status } = getDayStatus(dayjs().day())
 
   const onSubmit = async (activities: Report['activities']) => {
     try {
@@ -50,7 +53,9 @@ export const Actions = () => {
         <Typography.h2>
           Welcome
         </Typography.h2>
-        <Badge />
+        <Badge color={color}>
+          {status}
+        </Badge>
       </div>
       <div className='flex gap-6 pt-6 pb-8'>
         <Button path='/create-note'>

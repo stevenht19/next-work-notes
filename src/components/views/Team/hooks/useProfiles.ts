@@ -1,23 +1,29 @@
+import { useEffect, useState } from 'react'
+import { useReports } from '@/hooks/useReports'
 import { Profile } from '@/models/Profile'
 import { profileService } from '@/services/profiles/profile.service'
-import { useEffect, useState } from 'react'
 
-export type ProfileWithPartialData = Pick<Profile, 'id' | 'username'>
+export type ProfileWithPartialData = Pick<Profile, 'id' | 'username' | 'job'>
 
 export const useProfiles = () => {
+  const { team, setTeam } = useReports()
+  const [profile, setProfile] = useState<ProfileWithPartialData | null>(null)
 
-  const [profiles, setProfiles] = useState<ProfileWithPartialData[]>([])
-  const [profile, setProfile] = useState<ProfileWithPartialData | null>()
+  const teamLength = team.length
 
   useEffect(() => {
+
+    if (teamLength) return
+
     const getProfiles = async () => {
       const data = await profileService
         .findProfiles()
-      setProfiles(data ?? [])
+
+      setTeam(data ?? [])
     }
 
     getProfiles()
-  }, [])
+  }, [setTeam, teamLength])
 
   const onSelect = (profile: ProfileWithPartialData) => {
     setProfile(profile)
@@ -26,7 +32,7 @@ export const useProfiles = () => {
   const onClear = () => setProfile(null)
 
   return [
-    profiles,
+    team,
     profile,
     onSelect,
     onClear

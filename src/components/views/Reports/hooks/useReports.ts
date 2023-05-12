@@ -1,18 +1,13 @@
-import { useEffect, useContext, useState } from 'react'
-import { reportService } from '@/services/reports/report.service'
+import { useContext, useState } from 'react'
 import { ReportContext } from '@/context/Report'
 import { Report } from '@/models/Report'
+import { useReportsData } from '@/hooks/useReportsData'
 
 export const useReports = () => {
 
-  const { reports, editReport, setReports } = useContext(ReportContext)
+  const { editReport } = useContext(ReportContext)
+  const [reports] = useReportsData()
   const [report, setReport] = useState<Report | null>(null)
-
-  useEffect(() => {
-    reportService
-      .getReports()
-      .then(setReports)
-  }, [])
 
   const onEdit = (report: Report) => {
     editReport(report)

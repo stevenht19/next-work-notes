@@ -8,10 +8,9 @@ import { Profile } from '@/models/Profile'
 const supabase = createBrowserSupabaseClient<Database>()
 
 class ReportService {
+
   async getReports() {
-
     const { startOfWeek, endOfWeek } = getDates()
-
     const auth = await supabase.auth.getUser()
     
     const { data } = await supabase
@@ -98,6 +97,15 @@ class ReportService {
       .order('created_at', { ascending: true })
 
     return data
+  }
+
+  async findAllReports(userId: Profile['id']) {
+    const { data } = await supabase
+    .from('reports')
+    .select('*')
+    .eq('user_id', userId)
+
+    return data ?? []
   }
 }
 

@@ -8,8 +8,8 @@ import { AlertDialog } from '@/components/modals/AlertDialog'
 import { Toolbar } from '@/components/editor/Toolbar'
 import { config } from '@/components/editor/config'
 import { Settings } from './Settings'
-import { Input } from './Input'
 import { Footer } from './Footer'
+import { Input } from './Input'
 import { Props } from './types'
 
 export default function NoteForm({ initialValues, onSubmit }: Props) {
