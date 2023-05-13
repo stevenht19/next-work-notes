@@ -34,7 +34,7 @@ export const Day = ({ day, days }: Props) => {
   const createReport = async (activities: Report['activities']) => {
     try {
       
-      const parsedDate = toISOString(dayjs(day).hour(0))
+      const parsedDate = toISOString(dayjs(day).hour(1))
       
       const report = await reportService
         .createReport({ 
@@ -70,7 +70,10 @@ export const Day = ({ day, days }: Props) => {
       </button>
       {
         open && (
-          <DailyReport size='max-w-lg' onClose={setOpen.off}>
+          <DailyReport
+            size='max-w-lg'
+            onClose={setOpen.off}
+          >
             <DailyReportForm
               action={createReport}
               customDate={day.format('YYYY-MM-DD')}

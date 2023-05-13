@@ -38,7 +38,7 @@ export const HomeTabs = ({ notes }: HomeProps) => {
       </Tabs>
       <TabPanel index={0} value={value}>
         {
-          Boolean(notes.length) ? (
+          Boolean(notes?.length) ? (
             <Notes notes={notes} />
           ) : (
             <Typography color='text-zinc-400'>
