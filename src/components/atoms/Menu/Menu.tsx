@@ -32,7 +32,7 @@ const Menu = ({ open, children, onClose }: Props) => {
       {
         open && (
           <div
-            className='shadow-lg opacity-0 animate-[fadeIn_.22s_forwards] top-full m-2 rounded-md bg-zinc-950/90 border border-neutral-800 right-0 absolute'
+            className='shadow-lg opacity-0 animate-[fadeIn_.22s_forwards] top-full m-2 rounded-md bg-zinc-950/90 border border-neutral-800 right-0 absolute w-fit'
           >
             {children}
           </div>
