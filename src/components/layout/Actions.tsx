@@ -12,13 +12,12 @@ import { useToast } from '@/hooks/useToast'
 import { useReports } from '@/hooks/useReports'
 import { getDayStatus } from '@/utils/getDayStatus'
 
-const DailyReportModal = dynamic(() => 
+const DailyReportModal = dynamic(() =>
   import('@/components/modals/DailyReport').then(mod => mod.DailyReport), {
   loading: () => null
 })
 
 export const Actions = () => {
-  
   const user = useUser()
   const [open, setOpen] = useBoolean()
   const { addReport } = useReports()
@@ -28,8 +27,8 @@ export const Actions = () => {
   const onSubmit = async (activities: Report['activities']) => {
     try {
       const report = await reportService
-        .createReport({ 
-          activities, 
+        .createReport({
+          activities,
           user_id: user?.id
         })
 
@@ -53,9 +52,13 @@ export const Actions = () => {
         <Typography.h2>
           Welcome
         </Typography.h2>
-        <Badge color={color}>
-          {status}
-        </Badge>
+        {
+          Boolean(user) && (
+            <Badge color={color}>
+              {status}
+            </Badge>
+          )
+        }
       </div>
       <div className='flex gap-6 pt-6 pb-8'>
         <Button path='/create-note'>

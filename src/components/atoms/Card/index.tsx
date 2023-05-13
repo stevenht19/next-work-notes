@@ -27,7 +27,7 @@ export const Card = ({
 }: Props) => {
 
   const date = created_at ? dayjs(created_at).calendar() : null
-  const className = 'rounded-md outline outline-1 outline-zinc-900 p-4 hover:outline-2'
+  const className = 'rounded-md outline outline-1 outline-zinc-900 p-4 hover:outline-2 group'
 
   if (!path) {
     return (
@@ -39,7 +39,7 @@ export const Card = ({
           avatar ? (
             <div className='flex'>
               {avatar}
-              <div className='pl-3'>
+              <div className='flex flex-col pl-3'>
                 <CardTitle>
                   {title}
                 </CardTitle>
@@ -91,7 +91,7 @@ export const Card = ({
 const CardTitle = ({ children }: {
   children: React.ReactNode
 }) => (
-  <h2 className='font-bold text-start text-sm text-neutral-300'>
+  <h2 className='group-hover:text-white font-bold text-start text-sm text-neutral-300'>
     {children}
   </h2>
 )
@@ -107,7 +107,7 @@ const CardDate = ({ children }: {
 const CardSubheader = ({ children }: {
   children: React.ReactNode
 }) => (
-  <span className='text-[.8rem] text-zinc-400 mt-1'>
+  <span className='text-[.8rem] text-zinc-400 mt-1 text-start'>
     {children}
   </span>
 )

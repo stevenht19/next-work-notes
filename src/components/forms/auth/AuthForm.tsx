@@ -35,7 +35,7 @@ export default function AuthForm({ initialState, title, action }: Props) {
         {signUpCredentials ? `Let's get started for free!` : 'Welcome again!'}
       </Typography>
       <form
-        className='flex flex-col gap-7 border border-zinc-800 mt-6 p-8 rounded-md'
+        className='flex flex-col gap-6 border border-zinc-800 mt-6 p-8 rounded-md'
         onSubmit={handleSubmit(onSubmit)}
       >
         {
