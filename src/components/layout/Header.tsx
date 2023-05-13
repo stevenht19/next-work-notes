@@ -7,7 +7,6 @@ import { Routes } from '@/utils/routes'
 export const Header = () => {
 
   const { pathname } = useRouter()
-
   const isInAuthPage = pathname === Routes.SIGN_UP || pathname === Routes.LOGIN
 
   return (

@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { useRouter } from 'next/router'
-import { MdSaveAlt } from 'react-icons/md'
 import { HiOutlineInformationCircle } from 'react-icons/hi'
+import { MdSaveAlt } from 'react-icons/md'
 import { Editor } from '@tiptap/react'
 import { Report } from '@/models/Report'
 import { Button } from '@/components/atoms/Button'
@@ -17,6 +16,7 @@ type Props = {
 }
 
 export const Footer = ({ loading, editor, onSave }: Props) => {
+
   const { onOpen: setToast } = useToast()
   const [activities, setActivities] = useState<Report['activities']>([])
 
@@ -29,8 +29,8 @@ export const Footer = ({ loading, editor, onSave }: Props) => {
   }
 
   const createReport = async (activities: Report['activities']) => {
-
     try {
+      
       await reportService
       .createReport({ activities })
 
@@ -39,6 +39,8 @@ export const Footer = ({ loading, editor, onSave }: Props) => {
         message: 'Daily report created successfully'
       })
     
+      setActivities([])
+
     } catch(err) {
       if (err instanceof Error)
 
@@ -56,9 +58,7 @@ export const Footer = ({ loading, editor, onSave }: Props) => {
     <footer className='flex pb-7 gap-6'>
       <Button
         onClick={onOpen}
-        icon={
-          <HiOutlineInformationCircle size={22} />
-        }
+        icon={<HiOutlineInformationCircle size={22} />}
       >
         Generate Report
       </Button>

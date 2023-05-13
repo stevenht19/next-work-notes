@@ -33,20 +33,24 @@ export const Day = ({ day, days }: Props) => {
 
   const createReport = async (activities: Report['activities']) => {
     try {
+      
+      const parsedDate = toISOString(dayjs(day).hour(1))
+      
       const report = await reportService
         .createReport({ 
           activities,
           user_id: user?.id,
-          created_at: toISOString(dayjs(day).hour(dayjs().hour())),
+          created_at: parsedDate,
         })
 
       if (report)
         addReport(report)
+
       setOpen.off()
+
     } catch (err) {
 
       if (err instanceof Error)
-
       onOpen({
         type: 'error',
         message: err.message
@@ -66,8 +70,14 @@ export const Day = ({ day, days }: Props) => {
       </button>
       {
         open && (
-          <DailyReport size='max-w-lg' onClose={setOpen.off}>
-            <DailyReportForm action={createReport} />
+          <DailyReport
+            size='max-w-lg'
+            onClose={setOpen.off}
+          >
+            <DailyReportForm
+              action={createReport}
+              customDate={day.format('YYYY-MM-DD')}
+            />
           </DailyReport>
         )
       }

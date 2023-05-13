@@ -5,7 +5,8 @@ import { useProfiles } from './hooks/useProfiles'
 import { UserReport } from './UserReport'
 import { Avatar } from './Avatar'
 
-export const Workgroup = () => {
+export default function Team() {
+  
   const [profiles, profile, onSelect, onClear] = useProfiles()
 
   return (
@@ -27,7 +28,7 @@ export const Workgroup = () => {
             key={props.id}
             id={props.id}
             title={`${props.username}`}
-            subheader={`${props.job}`}
+            subheader={`${props.job ?? 'new'}`}
             onClick={() => onSelect(props)}
             avatar={<Avatar username={props.username!} />}
           />

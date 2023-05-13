@@ -33,10 +33,10 @@ export const Avatar = () => {
         {user?.email?.charAt(0).toUpperCase()}
       </button>
       <Menu open={open} onClose={setOpen.off}>
-        <div className='text-zinc-400 pt-4 px-4'>
+        <div className='text-zinc-400 pt-4 px-4 whitespace-nowrap'>
           {user?.email}
         </div>
-        <Menu.Item onClick={signOut}>
+        <Menu.Item onClick={signOut} w={loggingOut ? 'min-w-[12rem]' : 'w-full'}>
           <AiOutlinePoweroff size={17} />
           {
             loggingOut ? 'Logging out...' : 'Sign out'
