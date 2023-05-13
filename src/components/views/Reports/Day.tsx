@@ -34,8 +34,8 @@ export const Day = ({ day, days }: Props) => {
   const createReport = async (activities: Report['activities']) => {
     try {
       
-      const parsedDate = toISOString(dayjs(day).hour(dayjs().hour()))
-
+      const parsedDate = toISOString(dayjs(day).hour(0))
+      
       const report = await reportService
         .createReport({ 
           activities,
@@ -47,6 +47,7 @@ export const Day = ({ day, days }: Props) => {
         addReport(report)
 
       setOpen.off()
+
     } catch (err) {
 
       if (err instanceof Error)
