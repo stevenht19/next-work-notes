@@ -33,14 +33,11 @@ export const Day = ({ day, days }: Props) => {
 
   const createReport = async (activities: Report['activities']) => {
     try {
-      
-      const parsedDate = toISOString(dayjs(day).hour(1))
-      
       const report = await reportService
         .createReport({ 
           activities,
           user_id: user?.id,
-          created_at: parsedDate,
+          created_at: toISOString(dayjs(day).hour(1)),
         })
 
       if (report)
