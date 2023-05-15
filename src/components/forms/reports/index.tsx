@@ -15,6 +15,7 @@ import { Activity } from './types'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import localeData from 'dayjs/plugin/localeData'
+import { isWorkday, toISOString } from '@/utils/getWeekDates'
 
 dayjs.locale('en')
 dayjs.extend(relativeTime)
@@ -90,7 +91,11 @@ export const DailyReportForm = ({
     setSubmitting.on()
     const texts = activities.map(({ name }) => name)
     await action(texts)
-    editUserActivity(texts, customDate ?? report?.created_at)
+
+    if (!isWorkday(toISOString(dayjs()))) {
+      editUserActivity(texts, customDate ?? report?.created_at)
+    }
+    
     setSubmitting.off()
   }
   
