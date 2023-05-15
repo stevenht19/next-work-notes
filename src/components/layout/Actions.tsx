@@ -32,9 +32,7 @@ export const Actions = () => {
           user_id: user?.id
         })
 
-      if (report) {
-        addReport(report)
-      }
+      addReport(report!)
 
     } catch (err) {
       if (err instanceof Error) {

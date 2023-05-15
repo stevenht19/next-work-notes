@@ -2,8 +2,8 @@ import { getDates, isWorkday, toISOString } from '@/utils/getWeekDates'
 import { CreateReport, UpdateReport } from '@/models/Report'
 import { Database } from '@/models/supabase'
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
-import dayjs from 'dayjs'
 import { Profile } from '@/models/Profile'
+import dayjs from 'dayjs'
 
 const supabase = createBrowserSupabaseClient<Database>()
 
